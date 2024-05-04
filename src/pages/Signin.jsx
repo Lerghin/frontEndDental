@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { API } from "../utils/axios";
 import { toast } from 'react-toastify';
-import './Signup.css';
+import '../pages/css/Signup.css';
 const Signin = () => {
   const navigate = useNavigate();
   const inputUsername = useRef();

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { API } from '../utils/axios'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import './Signup.css';
+import '../pages/css/Signup.css';
 const Signup = () => {
 
     const [userData, setUserData]= useState({

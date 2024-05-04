@@ -4,13 +4,13 @@
     align-items: center;
     
     height: 100vh;
-    background-image: url(https://img.freepik.com/fotos-premium/diente-grande-espejo-dentista-clinica-dentista_488220-60527.jpg);
+    
 
    background-attachment:fixed ;
 
 background-size: cover;
    
-    background-color: #f0f2f5; /* Light gray background */
+    background-color: #cacfcf; 
   }
   
   .signup-card {
@@ -55,12 +55,16 @@ background-size: cover;
     justify-content: space-evenly;
     padding: 1rem;
   }
-  .form-input{
+  .form-input {
     border-radius: 10px;
     text-align: center;
   }
   .form-heading{
    font-weight: bold;
    padding-top: 1rem;
+  }
+  select {
+    border-radius: 10px;
+    text-align: center;
   }
   

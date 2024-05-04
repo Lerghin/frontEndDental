@@ -8,6 +8,7 @@ import HomeAdmin from  "./pages/HomeAdmin.jsx";
 import Signup from "./pages/Signup";
 import LayoutAdmin from "./layouts/LayoutAdmin.jsx";
 import Pacientes from "./pages/Pacientes.jsx";
+import RegistrarPacientes from "./pages/RegistrarPacientes.jsx";
 
 
 const router = createBrowserRouter([
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: '/patients',
         element: <Pacientes />
+      },
+      {
+        path: '/createPatients',
+        element: <RegistrarPacientes />
       },
 
     ]

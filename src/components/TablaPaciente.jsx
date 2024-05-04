@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+import "../pages/css/Home.css";
 
 
 const TablaPaciente = ({ data }) => {
   const {
-    codigo_paciente,
+    
     nombre,
     apellido,
     sexo,
@@ -10,20 +12,22 @@ const TablaPaciente = ({ data }) => {
     correoElectronico,
     direccion,
     telefono,
+    nombreDoctor,
+    apellidoDoctor
   } = data;
 
   return (
     
       
     <tr>
-    <td>{codigo_paciente}</td>
-    <td>{nombre}</td>
-    <td>{apellido}</td>
+  
+    <td className="namePatient"> <Link to="/"> {nombre} {apellido}</Link></td>
     <td>{sexo}</td>
     <td>{cedula}</td>
     <td>{correoElectronico}</td>
     <td>{direccion}</td>
     <td>{telefono}</td>
+    <td>{nombreDoctor} {apellidoDoctor}</td>
   </tr>
  
   );

@@ -25,13 +25,13 @@
     
             <CDBSidebarContent className="sidebar-content">
               <CDBSidebarMenu>
-                <NavLink exact to="/pacientes" activeClassName="activeClicked">
+                <NavLink exact to="/patients" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="columns">Pacientes</CDBSidebarMenuItem>
                 </NavLink>
                 <NavLink exact to="/Signin" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="table">Buscar Paciente</CDBSidebarMenuItem>
                 </NavLink>
-                <NavLink exact to="/profile" activeClassName="activeClicked">
+                <NavLink exact to="/createPatients" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="user">Registrar Paciente</CDBSidebarMenuItem>
                 </NavLink>
               </CDBSidebarMenu>
