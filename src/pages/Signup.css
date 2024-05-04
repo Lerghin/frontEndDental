@@ -1,0 +1,66 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    height: 100vh;
+    background-image: url(https://img.freepik.com/fotos-premium/diente-grande-espejo-dentista-clinica-dentista_488220-60527.jpg);
+
+   background-attachment:fixed ;
+
+background-size: cover;
+   
+    background-color: #f0f2f5; /* Light gray background */
+  }
+  
+  .signup-card {
+    background-color: rgb(14, 119, 102); /* White card background */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 400px; /* Adjust width as needed */
+  }
+  
+  .signup-form {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+   
+    background-color:#d9e2e2;
+    text-align: center;
+ 
+  }
+
+  
+  .form-heading {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333; 
+
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333; 
+  }
+  .form-actions{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem;
+  }
+  .form-input{
+    border-radius: 10px;
+    text-align: center;
+  }
+  .form-heading{
+   font-weight: bold;
+   padding-top: 1rem;
+  }
+  
