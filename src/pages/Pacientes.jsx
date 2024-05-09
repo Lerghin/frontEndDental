@@ -5,6 +5,7 @@ import TablaPaciente from "../components/TablaPaciente";
 import Table from "react-bootstrap/Table"; // Asegúrate de importar la tabla
 import "../pages/css/Home.css";
 
+
 const Pacientes = () => {
   const [pacientes, setPacientes] = useState([]);
   const [search, setSearch] = useState("");
@@ -15,7 +16,7 @@ const Pacientes = () => {
       .then((response) => {
         setPacientes(response.data);
         setResults(response.data)
-        console.log(response.data);
+        
       })
       .catch((error) => console.error("Error fetching pacientes:", error));
   }, []);
@@ -43,7 +44,7 @@ const Pacientes = () => {
       <div>
         <input style={{textAlign:"center"}} value={search} onChange={searcher} type="text" placeholder='Buscar Paciente' className='form-control' />
       </div>
-      <div className=" responsive-table">
+      <div className="flex-container responsive-table">
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -55,6 +56,8 @@ const Pacientes = () => {
               <th>Dirección</th>
               <th>Teléfono</th>
               <th>Doctor Asignado</th>
+              <th></th>
+           
               
               
             </tr>

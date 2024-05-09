@@ -18,22 +18,25 @@
          <div  style={{ display: 'flex', height: '100rem', overflow: 'scroll initial' }} >
           <CDBSidebar textColor="#fff" backgroundColor="#033d3d">
             <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-              <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
+              <a href="#" className="text-decoration-none" style={{ color: 'inherit' }}>
                 Menu
               </a>
             </CDBSidebarHeader>
     
             <CDBSidebarContent className="sidebar-content">
               <CDBSidebarMenu>
+              <NavLink exact to="/homeadmin" activeClassName="activeClicked">
+                  <CDBSidebarMenuItem icon="home">Inicio</CDBSidebarMenuItem>
+                </NavLink>
                 <NavLink exact to="/patients" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="columns">Pacientes</CDBSidebarMenuItem>
                 </NavLink>
-                <NavLink exact to="/Signin" activeClassName="activeClicked">
-                  <CDBSidebarMenuItem icon="table">Buscar Paciente</CDBSidebarMenuItem>
-                </NavLink>
+    
                 <NavLink exact to="/createPatients" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="user">Registrar Paciente</CDBSidebarMenuItem>
                 </NavLink>
+              
+               
               </CDBSidebarMenu>
             </CDBSidebarContent>
     

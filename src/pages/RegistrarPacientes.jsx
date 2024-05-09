@@ -4,14 +4,14 @@ import { API } from "../utils/axios"
 import { toast } from "react-toastify"
 import SideBarPacientes from "../components/SideBarPacientes"
 import axios from "axios"
-
+import  '../pages/css/RegistroPaciente.css'
 
 const RegistrarPacientes = () => {
 
     const [doctor, setDoctor]= useState([]);
     const [userData, setUserData]= useState({
-        firstname:'',
-        lastname:'',
+        nombre:'',
+        apellido:'',
         sexo:'',
         cedula:'',
         direccion: '',
@@ -41,10 +41,11 @@ const RegistrarPacientes = () => {
     }
     const handleSubmit= async()=>{
         try{
-            const {data}= await API.post('register/admin', userData)
+            const {data}= await API.post('/pacientes/crear/', userData)
             console.log(data)
             toast.success(data.message)
-            navigate('/home')
+            alert("Paciente Registrado con éxito")
+            navigate('/patients')
         }catch (error){
             const {message}=error.response.data
             console.log(error)
@@ -53,13 +54,17 @@ const RegistrarPacientes = () => {
     }
   return (
     <>
-    <SideBarPacientes/>
+    <div className="home">
+      <div>
+        <SideBarPacientes />
+      </div>
+   
     <div className="registrar"> 
         
-    <div className="signup-container">
+    <div className="sign-container">
   
-    <div className="signup-card">
-      <form className="signup-form" onSubmit={(e) => e.preventDefault()}>
+    <div className="sign-card">
+      <form className="sign-form" onSubmit={(e) => e.preventDefault()}>
         <h2 className="form-heading">Registrar Paciente</h2>
 
         <div className="form-group">
@@ -71,7 +76,7 @@ const RegistrarPacientes = () => {
             value={userData.nombre}
             onChange={handleChange}
             className="form-input"
-            placeholder="Ingresa tu nombre"
+            placeholder="Ingresa nombre"
             autoComplete="off"
             required
           />
@@ -86,7 +91,7 @@ const RegistrarPacientes = () => {
             value={userData.apellido}
             onChange={handleChange}
             className="form-input"
-            placeholder="Ingresa tu apellido"
+            placeholder="Ingresa apellido"
             autoComplete="off"
             required
           />
@@ -94,7 +99,7 @@ const RegistrarPacientes = () => {
 
         <div className="form-group">
           <label htmlFor="sexo" className="form-label">Sexo</label>
-          <select  id="sexo" value={userData.sexo} onChange={handleChange}>
+          <select  id="sexo" name="sexo" value={userData.sexo} onChange={handleChange}>
         <option  type="text" value="">Seleccione una opción...</option>
         <option type="text" value="Masculino">Masculino</option>
         <option  type="text" value="Femenino">Femenino</option>
@@ -106,7 +111,7 @@ const RegistrarPacientes = () => {
           <input
             type="text"
             id="cedula"
-            name="telefono"
+            name="cedula"
             value={userData.cedula}
             onChange={handleChange}
             className="form-input"
@@ -145,8 +150,8 @@ const RegistrarPacientes = () => {
           <input
             type="email"
             id="correo"
-            name="correo"
-            value={userData.telefono}
+            name="correoElectronico"
+            value={userData.correoElectronico}
             onChange={handleChange}
             className="form-input"
             placeholder="Ingrese su email"
@@ -154,10 +159,10 @@ const RegistrarPacientes = () => {
           />
         </div>
         <label htmlFor="doctor">Doctor Asignado:</label>
-      <select id="doctor" value={userData.codigo_doctor} onChange={handleChange}>
+      <select id="doctor" name="codigo_doctor" value={userData.codigo_doctor} onChange={handleChange}>
         <option value="">Seleccione una opción...</option>
         {doctor.map(doc => (
-          <option key={doc.codigo_doctor} value={doc.codigo_doctor}>{doc.name}</option>
+          <option key={doc.codigo_doctor} value={doc.codigo_doctor}>{doc.nombre} {doc.apellido}</option>
         ))}
       </select>
 
@@ -170,6 +175,8 @@ const RegistrarPacientes = () => {
       </form>
     </div>
   </div>
+  </div>
+  
   </div>
   </>
   )

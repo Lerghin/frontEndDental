@@ -9,6 +9,10 @@ import Signup from "./pages/Signup";
 import LayoutAdmin from "./layouts/LayoutAdmin.jsx";
 import Pacientes from "./pages/Pacientes.jsx";
 import RegistrarPacientes from "./pages/RegistrarPacientes.jsx";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import DetailsPatients from "./pages/DetailsPatients.jsx";
+import EditPatient from "./pages/EditPatient.jsx";
 
 
 const router = createBrowserRouter([
@@ -49,7 +53,15 @@ const router = createBrowserRouter([
         path: '/createPatients',
         element: <RegistrarPacientes />
       },
-
+      {
+        path: '/watchPatient/:codigo_paciente',
+        element: <DetailsPatients />
+      },
+      {
+        path: '/editPatient/:codigo_paciente',
+        element: <EditPatient />
+      },
+    
     ]
   }
 ])
@@ -58,9 +70,10 @@ function App() {
 
 
   return (
+      <>
     <RouterProvider router={router} />
-    
-
+    <ToastContainer />
+    </>
 
   
   )
