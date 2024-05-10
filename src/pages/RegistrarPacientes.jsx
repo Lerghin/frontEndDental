@@ -5,6 +5,8 @@ import { toast } from "react-toastify"
 import SideBarPacientes from "../components/SideBarPacientes"
 import axios from "axios"
 import  '../pages/css/RegistroPaciente.css'
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
 const RegistrarPacientes = () => {
 
@@ -14,10 +16,12 @@ const RegistrarPacientes = () => {
         apellido:'',
         sexo:'',
         cedula:'',
+        edad: '',
         direccion: '',
         telefono: '',
         correoElectronico: '',
-        codigo_doctor:''
+        codigo_doctor:'',
+        fecha_nacimiento: new Date(),
     })
     const navigate= useNavigate()
 
@@ -27,20 +31,23 @@ const RegistrarPacientes = () => {
           .then(response => {
            
             setDoctor(response.data);
-            console.log(response.data)
+            //console.log(response.data)
           })
           .catch(error => {
             console.error('Error fetching options:', error);
           });
       }, []); 
     
-      
+      const handleChangeDate = (date) => {
+        setUserData({ ...userData, fecha_nacimiento: date });
+      };
     const handleChange= (e)=>{
         setUserData({...userData, [e.target.name]:e.target.value})
     
     }
     const handleSubmit= async()=>{
         try{
+          console.log(userData.fecha_nacimiento);
             const {data}= await API.post('/pacientes/crear/', userData)
             console.log(data)
             toast.success(data.message)
@@ -119,6 +126,37 @@ const RegistrarPacientes = () => {
             required
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="edad" className="form-label">Edad</label>
+          <input
+            type="text"
+            id="edad"
+            name="edad"
+            value={userData.edad}
+            onChange={handleChange}
+            className="form-input"
+            placeholder="Ingrese su Edad"
+            required
+          />
+        </div>
+        <div className="form-group">
+                  <label htmlFor="fecha_nacimiento" className="form-label">
+                    Fecha de Nacimiento
+                  </label>
+                  
+                  <DatePicker
+          id="fecha_nacimiento"
+          selected={userData.fecha_nacimiento}
+          onChange={handleChangeDate}
+          dateFormat="yyyy-MM-dd"
+          placeholderText="Seleccionar fecha"
+          showYearDropdown
+          scrollableYearDropdown
+          yearDropdownItemNumber={100}
+          scrollableMonthYearDropdown
+          className="form-control text-center"
+        />
+                </div>
         <div className="form-group">
           <label htmlFor="direccion" className="form-label">Dirección</label>
           <textarea

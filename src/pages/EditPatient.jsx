@@ -5,15 +5,20 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidSave } from "react-icons/bi";
+import { toast } from "react-toastify"
 const EditPatientForm = () => {
     const [paciente, setPaciente] = useState(null);
+    const[doctor, setDoctor]=useState(null);
     const navigate= useNavigate();
     const params = useParams();
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/pacientes/traer/${params.codigo_paciente}`);
+                const response = await axios.get(`http://localhost:8080/pacientesdr/traer/${params.codigo_paciente}`);
+                const responseDoctor=await axios.get('http://localhost:8080/doctor/traer');
                 setPaciente(response.data);
+                setDoctor(responseDoctor.data);
+               
                 console.log(params.codigo_paciente);
             } catch (error) {
                 console.error('Error fetching paciente data:', error);
@@ -27,15 +32,24 @@ const EditPatientForm = () => {
         const { name, value } = event.target;
         setPaciente({ ...paciente, [name]: value });
     };
+    const handleDoctorChange = (event) => {
+        const { name, value } = event.target;
+        setPaciente({ ...paciente, [name]: value });
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.put(`http://localhost:8080/pacientes/editar/${params.codigo_paciente}`, paciente);
+      const{data}=   await axios.put(`http://localhost:8080/pacientes/editar/${params.codigo_paciente}`, paciente);
+                
+            toast.success(data.message)
+      
             alert("Paciente Modificado con éxito")
+            
             navigate('/patients');
             console.log('Paciente actualizado correctamente');
         } catch (error) {
+            toast.success(error.message)
             console.error('Error updating paciente:', error);
         }
     };
@@ -46,7 +60,7 @@ const EditPatientForm = () => {
 
     return (
         <Container>
-        <h2 className='flex justify-center font-bold translate-x-4'>Editar Paciente</h2>
+        <h2 className='flex justify-center font-bold translate-x-4 m-10 font-'>Editar Paciente</h2>
         <Form onSubmit={handleSubmit}>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formNombre">
@@ -93,6 +107,15 @@ const EditPatientForm = () => {
                     <Form.Label>Correo Electrónico</Form.Label>
                     <Form.Control type="email" name="correoElectronico" value={paciente.correoElectronico} onChange={handleInputChange} />
                 </Form.Group>
+                <Form.Group as={Col} >
+                        <Form.Label htmlFor="doctor">Doctor Asignado:</Form.Label>
+                        <Form.Select id="doctor" name="codigo_doctor" value={paciente.codigo_doctor} onChange={handleDoctorChange}>
+                            <option value="">Seleccione una opción...</option>
+                            {doctor.map(doc => (
+                                <option key={doc.codigo_doctor} value={doc.codigo_doctor}>{doc.nombre} {doc.apellido}</option>
+                            ))}
+                        </Form.Select>
+                    </Form.Group>
             </Row>
             <div className='flex justify-center  gap-4'>
             <Button variant="success"  type="submit"><BiSolidSave /> </Button>

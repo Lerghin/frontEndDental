@@ -34,6 +34,12 @@ const Pacientes = () => {
     );
     setResults(searchTerm.trim === ""? pacientes: filteredPatients)
   };
+
+  
+  const handleDelete = (codigo_paciente) => {
+    setResults(prevResults => prevResults.filter(paciente => paciente.codigo_paciente !== codigo_paciente));
+    setPacientes((prevPacientes) => prevPacientes.filter((paciente) => paciente.codigo_paciente !== codigo_paciente));
+  };
   return (
     <div className="home">
       <div>
@@ -51,12 +57,14 @@ const Pacientes = () => {
              
               <th>Nombre y Apellido</th>
               <th>Sexo</th>
+              <th>Edad</th>
               <th>Cédula</th>
               <th>Correo Electrónico</th>
               <th>Dirección</th>
               <th>Teléfono</th>
               <th>Doctor Asignado</th>
-              <th></th>
+              <th ></th>
+            
            
               
               
@@ -64,7 +72,7 @@ const Pacientes = () => {
           </thead>
           <tbody>
             {results.map((paciente) => (
-              <TablaPaciente key={paciente.codigo_paciente} data={paciente} />
+              <TablaPaciente key={paciente.codigo_paciente} data={paciente}  onDelete={handleDelete} />
             ))}
           </tbody>
         </Table>
