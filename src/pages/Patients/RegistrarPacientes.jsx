@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { API } from "../utils/axios"
+
 import { toast } from "react-toastify"
-import SideBarPacientes from "../components/SideBarPacientes"
+import SideBarPacientes from "../../components/SideBarPacientes"
 import axios from "axios"
-import  '../pages/css/RegistroPaciente.css'
+import  './../css/RegistroPaciente.css'
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import { API } from "../../utils/axios"
 
 const RegistrarPacientes = () => {
 
@@ -16,7 +17,7 @@ const RegistrarPacientes = () => {
         apellido:'',
         sexo:'',
         cedula:'',
-        edad: '',
+       
         direccion: '',
         telefono: '',
         correoElectronico: '',
@@ -63,7 +64,7 @@ const RegistrarPacientes = () => {
     <>
     <div className="home">
       <div>
-        <SideBarPacientes />
+        <SideBarPacientes className="home-sidebar" />
       </div>
    
     <div className="registrar"> 
@@ -126,19 +127,7 @@ const RegistrarPacientes = () => {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="edad" className="form-label">Edad</label>
-          <input
-            type="text"
-            id="edad"
-            name="edad"
-            value={userData.edad}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Ingrese su Edad"
-            required
-          />
-        </div>
+      
         <div className="form-group">
                   <label htmlFor="fecha_nacimiento" className="form-label">
                     Fecha de Nacimiento

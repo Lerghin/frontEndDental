@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import SideBarPacientes from "../components/SideBarPacientes";
+import SideBarPacientes from ".././../components/SideBarPacientes";
 import axios from "axios";
-import TablaPaciente from "../components/TablaPaciente";
+import TablaPaciente from "../../components/TablaPaciente";
 import Table from "react-bootstrap/Table"; // Asegúrate de importar la tabla
-import "../pages/css/Home.css";
+import "../css/Home.css";
 
 
 const Pacientes = () => {
@@ -43,7 +43,7 @@ const Pacientes = () => {
   return (
     <div className="home">
       <div>
-        <SideBarPacientes />
+        <SideBarPacientes className="home-sidebar" />
       </div>
 
       <div className="patientsTable">

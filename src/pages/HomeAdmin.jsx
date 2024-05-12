@@ -10,7 +10,7 @@ const Home = () => {
   return (
 
      <div className="home">
-      <ResponsiveSideBar  />
+      <ResponsiveSideBar  className="home-sidebar" />
       <div className='cardHome'>
 
       <Card className="cardIn" style={{ width: '18rem' }}>
@@ -32,7 +32,7 @@ const Home = () => {
               Gestión de Doctores
             </Card.Text>
             <br></br>
-            <Button  onClick={() => navigate('/signin')} variant="btn btn-secondary" >Gestionar</Button>
+            <Button  onClick={() => navigate('/doctors')} variant="btn btn-secondary" >Gestionar</Button>
           </Card.Body>
         </Card>
         <Card  className="cardIn" style={{ width: '18rem' }}>

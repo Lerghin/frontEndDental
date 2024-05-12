@@ -1,3 +1,4 @@
+
 import {
     CDBSidebar,
     CDBSidebarContent,
@@ -11,33 +12,31 @@ import {
 
 
 
-const ResponsiveSideBar = () => {
+const SideBarDoctores = () => {
   return (
     <>
-     <div style={{ display: 'flex', height: '100rem', overflow: 'scroll initial'  }} >
+     <div  style={{ display: 'flex', height: '100rem', overflow: 'scroll initial' }} >
       <CDBSidebar textColor="#fff" backgroundColor="#033d3d">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
+          <a href="#" className="text-decoration-none" style={{ color: 'inherit' }}>
             Menu
           </a>
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/homeadmin" activeClassName="activeClicked">
+          <NavLink exact to="/homeadmin" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="home">Inicio</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/createCita" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Registrar Citas</CDBSidebarMenuItem>
+            <NavLink exact to="/doctors" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="columns">Doctores</CDBSidebarMenuItem>
             </NavLink>
-         
-            <NavLink exact to="/createHistory" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Registrar Historia</CDBSidebarMenuItem>
+
+            <NavLink exact to="/createDoctor" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="user">Registrar Doctor</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/createPatients" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Registrar Pacientes</CDBSidebarMenuItem>
-            </NavLink>
-        
+          
+           
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
@@ -58,4 +57,6 @@ const ResponsiveSideBar = () => {
   )
 }
 
-export default ResponsiveSideBar
+export default SideBarDoctores
+
+

@@ -9,7 +9,9 @@
 .home-sidebar {
   width: 250px;
   padding: 20px;
+ 
   background-color: #f0f0f0;
+ 
 }
 
 .home-sidebar h2 {
@@ -33,7 +35,7 @@
 }
 .namePatient:hover::after{
 
- content: "Ver paciente";
+ content: "Ver Datos";
  position: absolute;
  background-color: #179282;
  color: #fff;
@@ -156,3 +158,4 @@ flex-wrap: wrap;
  text-align: left;
 }
 }
+
