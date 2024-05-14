@@ -28,14 +28,20 @@ const ResponsiveSideBar = () => {
               <CDBSidebarMenuItem icon="home">Inicio</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/createCita" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Registrar Citas</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="calendar">Registrar Citas</CDBSidebarMenuItem>
             </NavLink>
          
             <NavLink exact to="/createHistory" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Registrar Historia</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="file-alt">Registrar Historia</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/createPatients" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Registrar Pacientes</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="file-alt">Registrar Pacientes</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/createHorarios" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="file-alt">Crear Horarios</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/createUser" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="user">Crear Acceso Usuario</CDBSidebarMenuItem>
             </NavLink>
         
           </CDBSidebarMenu>

@@ -20,7 +20,8 @@ import EditDoctor from "./pages/Doctors/EditDoctor.jsx";
 import Histories from "./pages/HistoriasClinicas/Histories.jsx";
 import Horarios from "./pages/Horarios/Horarios.jsx";
 import EditHorarios from "./pages/Horarios/EditHorarios.jsx";
-
+import CreateHorarios from "./pages/Horarios/CreateHorarios.jsx";
+import Servicios from "./pages/Servicios/Servicios.jsx"
 
 const router = createBrowserRouter([
   {
@@ -96,6 +97,15 @@ const router = createBrowserRouter([
         path: '/editHorario/:horario_id',
         element: <EditHorarios/>
       },
+      
+      {
+        path: '/createHorario',
+        element: <CreateHorarios/>
+      },
+      {
+        path: '/services',
+        element: <Servicios/>
+      }
     ]
   }
 ])

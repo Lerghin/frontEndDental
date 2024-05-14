@@ -65,7 +65,7 @@ const Home = () => {
               Gestión de Servicios
             </Card.Text>
             <br></br>
-            <Button  onClick={() => navigate('/signin')} variant="btn btn-secondary" >Gestionar</Button>
+            <Button  onClick={() => navigate('/services')} variant="btn btn-secondary" >Gestionar</Button>
           </Card.Body>
         </Card>
         <Card  className="cardIn" style={{ width: '18rem' }}>

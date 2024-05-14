@@ -12,6 +12,7 @@ import {
 
 
 
+
 const SideBarHorarios= () => {
   return (
     <>
@@ -33,7 +34,7 @@ const SideBarHorarios= () => {
             </NavLink>
 
             <NavLink exact to="/createHorario" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Crear Horario</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem  icon="file-upload">Crear </CDBSidebarMenuItem>
             </NavLink>
            
           

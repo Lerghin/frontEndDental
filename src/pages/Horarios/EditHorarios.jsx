@@ -95,6 +95,7 @@ const EditHorario = () => {
                         </Form.Select>
                     </Form.Group>
             </Row>
+            <br></br>
             <div className='flex justify-center  gap-4'>
             <Button variant="success"  type="submit"><BiSolidSave /> </Button>
               <Button  onClick={() => navigate('/horarios')} variant="secondary"><RiArrowGoBackFill /></Button>

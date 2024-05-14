@@ -16,9 +16,10 @@ const Horarios = () => {
     axios
       .get("http://localhost:8080/horarios/traer")
       .then((response) => {
-        console.log(response.data)
+ 
         setHorarios(response.data);
         setResults(response.data)
+       
         
       })
       .catch((error) => console.error("Error fetching pacientes:", error));
@@ -29,7 +30,7 @@ const Horarios = () => {
     setSearch(searchTerm);
   
     const filteredHorarios = horarios.filter((hor) => {
-      // Combine search criteria for doctor name and last name
+
       const doctorFullName = `${hor.nombreDoctor} ${hor.apellidoDoctor}`.toLowerCase();
   
       return (
@@ -45,8 +46,16 @@ const Horarios = () => {
     setResults(filteredHorarios); 
   };
   const handleDelete = (horario_id) => {
-    setResults(prevResults => prevResults.filter(hor => hor.horario_id !== horario_id));
-    setHorarios((prevHorarios) => prevHorarios.filter((hor) => hor.horario_id !== horario_id));
+    
+    setResults(prevResults => prevResults.map(data => ({
+      ...data,
+      horariosDoctor: data.horariosDoctor.filter(horario => horario.horario_id !== horario_id)
+    })));
+  
+    setHorarios(prevHorarios => prevHorarios.map(data => ({
+      ...data,
+      horariosDoctor: data.horariosDoctor.filter(horario => horario.horario_id !== horario_id)
+    })));
   };
   return (
     <div className="home">
@@ -54,7 +63,7 @@ const Horarios = () => {
         <SideBarHorarios className="home-sidebar" />
       </div>
 
-      <div className="patientsTable ">
+      <div className="patientsTable  ">
       <div>
         <input style={{textAlign:"center"}} value={search} onChange={searcher} type="text" placeholder='Buscar Horario' className='form-control' />
       </div>
@@ -76,7 +85,8 @@ const Horarios = () => {
             </tr>
           </thead>
           <tbody>
-            {results.map((hor) => (
+            {results.map((hor) =>
+            (
               <TablaHorario key={hor.horario_id} data={hor}  onDelete={handleDelete} />
             ))}
           </tbody>
