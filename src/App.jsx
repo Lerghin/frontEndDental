@@ -16,6 +16,10 @@ import EditPatient from "./pages/Patients/EditPatient.jsx";
 import Doctors from "./pages/Doctors/Doctors.jsx";
 import DetailsDoctor from "./pages/Doctors/DetailsDoctor.jsx";
 import RegistrarDoctor from "./pages/Doctors/RegistrarDoctor.jsx";
+import EditDoctor from "./pages/Doctors/EditDoctor.jsx";
+import Histories from "./pages/HistoriasClinicas/Histories.jsx";
+import Horarios from "./pages/Horarios/Horarios.jsx";
+import EditHorarios from "./pages/Horarios/EditHorarios.jsx";
 
 
 const router = createBrowserRouter([
@@ -75,6 +79,22 @@ const router = createBrowserRouter([
       {
         path: '/createDoctor',
         element: <RegistrarDoctor/>
+      },
+      {
+        path: '/editDoctor/:codigo_doctor',
+        element: <EditDoctor/>
+      },
+      {
+        path: '/histories',
+        element: <Histories/>
+      },
+      {
+        path: '/horarios',
+        element: <Horarios/>
+      },
+      {
+        path: '/editHorario/:horario_id',
+        element: <EditHorarios/>
       },
     ]
   }

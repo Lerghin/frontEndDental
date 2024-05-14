@@ -28,7 +28,7 @@ const TablaDoctores = ({ data, onDelete }) => {
       try {
         await API.delete(`/doctor/borrar/${codigo_doctor}`);
         onDelete(codigo_doctor); 
-        navigate('/doctor/traer')
+        navigate('/doctors')
        
       } catch (error) {
         alert(error)

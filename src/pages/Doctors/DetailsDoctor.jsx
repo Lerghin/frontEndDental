@@ -120,7 +120,7 @@ const DetailsDoctor = () => {
         <Button onClick={handlePrint} variant="success">
           <FiPrinter />
         </Button>
-        <Button onClick={() => navigate("/patients")} variant="secondary">
+        <Button onClick={() => navigate("/doctors")} variant="secondary">
           <RiArrowGoBackFill />
         </Button>
       </div>

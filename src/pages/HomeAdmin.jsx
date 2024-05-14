@@ -43,7 +43,7 @@ const Home = () => {
               Gestión de Historias
             </Card.Text>
             <br></br>
-            <Button  onClick={() => navigate('/signin')} variant="btn btn-secondary" >Gestionar</Button>
+            <Button  onClick={() => navigate('/histories')} variant="btn btn-secondary" >Gestionar</Button>
           </Card.Body>
         </Card>
         <Card   className="cardIn"style={{ width: '18rem' }}>
@@ -76,7 +76,7 @@ const Home = () => {
               Gestión de Horarios
             </Card.Text>
             <br></br>
-            <Button  onClick={() => navigate('/signin')} variant="btn btn-secondary" >Gestionar</Button>
+            <Button  onClick={() => navigate('/horarios')} variant="btn btn-secondary" >Gestionar</Button>
           </Card.Body>
         </Card>
         <Card  className="cardIn" style={{ width: '18rem' }}>

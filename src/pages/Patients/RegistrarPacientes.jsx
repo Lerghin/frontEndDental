@@ -8,7 +8,7 @@ import  './../css/RegistroPaciente.css'
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { API } from "../../utils/axios"
-
+import '../css/RegistroPaciente.css'
 const RegistrarPacientes = () => {
 
     const [doctor, setDoctor]= useState([]);
@@ -67,7 +67,7 @@ const RegistrarPacientes = () => {
         <SideBarPacientes className="home-sidebar" />
       </div>
    
-    <div className="registrar"> 
+    <div className="registrar p-8"> 
         
     <div className="sign-container">
   
