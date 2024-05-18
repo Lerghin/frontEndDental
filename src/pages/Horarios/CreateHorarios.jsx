@@ -55,7 +55,7 @@ const CreateHorarios = () => {
   return (
     <Container>
       <h2 className="flex justify-center font-bold translate-x-4 m-10 font-">
-        Editar Paciente
+        Crear Horario
       </h2>
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">

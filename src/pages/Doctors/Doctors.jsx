@@ -12,16 +12,17 @@ const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
+  const [sortedDoctors, setSortedDoctors] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:8080/doctor/traer")
       .then((response) => {
-       
-        setDoctors(response.data);
-        setResults(response.data)
-        
+        const fetchedDoctors = response.data;
+        setDoctors(fetchedDoctors); 
+        setResults(fetchedDoctors); // Store original data in 'doctors'
+        setSortedDoctors(fetchedDoctors.sort((a, b) => a.nombre.localeCompare(b.nombre))); 
       })
-      .catch((error) => console.error("Error fetching pacientes:", error));
+      .catch((error) => console.error("Error fetching doctors:", error));
   }, []);
 
   const searcher = (e) => {

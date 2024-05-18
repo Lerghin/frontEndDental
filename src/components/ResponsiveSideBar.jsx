@@ -27,6 +27,9 @@ const ResponsiveSideBar = () => {
             <NavLink exact to="/homeadmin" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="home">Inicio</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/citaDay" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="file-alt">Citas del Día</CDBSidebarMenuItem>
+            </NavLink>
             <NavLink exact to="/createCita" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="calendar">Registrar Citas</CDBSidebarMenuItem>
             </NavLink>
@@ -40,6 +43,8 @@ const ResponsiveSideBar = () => {
             <NavLink exact to="/createHorarios" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="file-alt">Crear Horarios</CDBSidebarMenuItem>
             </NavLink>
+          
+           
             <NavLink exact to="/createUser" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Crear Acceso Usuario</CDBSidebarMenuItem>
             </NavLink>

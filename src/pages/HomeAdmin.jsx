@@ -54,7 +54,7 @@ const Home = () => {
               Gestión de Citas
             </Card.Text>
             <br></br>
-            <Button  onClick={() => navigate('/signin')} variant="btn btn-secondary" >Gestionar</Button>
+            <Button  onClick={() => navigate('/citas')} variant="btn btn-secondary" >Gestionar</Button>
           </Card.Body>
         </Card>
         <Card   className="cardIn"style={{ width: '18rem' }}>

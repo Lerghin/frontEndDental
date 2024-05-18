@@ -22,6 +22,12 @@ import Horarios from "./pages/Horarios/Horarios.jsx";
 import EditHorarios from "./pages/Horarios/EditHorarios.jsx";
 import CreateHorarios from "./pages/Horarios/CreateHorarios.jsx";
 import Servicios from "./pages/Servicios/Servicios.jsx"
+import CreateService from "./pages/Servicios/CreateService.jsx";
+import EditService from "./pages/Servicios/EditService.jsx";
+import Citas from "./pages/Citas/Citas.jsx";
+import CreateCita from "./pages/Citas/CreateCita.jsx";
+import CitasByDay from "./pages/Citas/CitasByDay.jsx";
+import EditCita from "./pages/Citas/EditCita.jsx";
 
 const router = createBrowserRouter([
   {
@@ -105,6 +111,32 @@ const router = createBrowserRouter([
       {
         path: '/services',
         element: <Servicios/>
+      },
+      {
+        path: '/createService',
+        element: <CreateService/>
+      },
+      {
+        path: '/editService/:codigo_servicio',
+        element: <EditService/>
+      },
+      {
+        path: '/citas',
+        element: <Citas/>
+      },
+      {
+        path: '/createCita',
+        element: <CreateCita/>
+      }
+      ,
+      {
+        path: '/citaDay',
+        element: <CitasByDay/>
+      }
+      ,
+      {
+        path: '/editCita/:codigo_cita',
+        element: <EditCita/>
       }
     ]
   }

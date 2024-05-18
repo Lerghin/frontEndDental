@@ -10,17 +10,19 @@ const Pacientes = () => {
   const [pacientes, setPacientes] = useState([]);
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
+  const [sortedPacientes, setSortedPacientes] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:8080/pacientesdr/traer")
       .then((response) => {
-        setPacientes(response.data);
-        setResults(response.data)
-        
+        const fetchedPat = response.data;
+        setPacientes(fetchedPat); 
+        console.log(fetchedPat)
+        setResults(fetchedPat); 
+        setSortedPacientes(fetchedPat.sort((a, b) => a.nombre.localeCompare(b.nombre))); 
       })
-      .catch((error) => console.error("Error fetching pacientes:", error));
+      .catch((error) => console.error("Error fetching doctors:", error));
   }, []);
-
   const searcher = (e) => {
     const searchTerm= e.target.value.toLowerCase();
     setSearch(searchTerm);
@@ -28,6 +30,7 @@ const Pacientes = () => {
     const filteredPatients= pacientes.filter(pat=> 
     pat.nombre.toLowerCase().includes(searchTerm)||
     pat.apellido.toLowerCase().includes(searchTerm)||
+    pat.nombreDoctor.toLowerCase().includes(searchTerm)||
     pat.cedula.toString().includes(searchTerm)
   
 
