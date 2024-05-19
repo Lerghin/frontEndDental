@@ -70,24 +70,24 @@ const EditHorario = () => {
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formDiaSemana">
                     <Form.Label>Día de la Semana</Form.Label>
-                    <Form.Control type="text" name="diaSemana" value={horario.diaSemana} onChange={handleInputChange} />
+                    <Form.Control type="text" name="diaSemana" value={horario.diaSemana} onChange={handleInputChange}   required/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formhoraInicio">
                     <Form.Label>Hora de Inicio</Form.Label>
-                    <Form.Control type="text" name="horaInicio" value={horario.horaInicio} onChange={handleInputChange} />
+                    <Form.Control type="text" name="horaInicio" value={horario.horaInicio} onChange={handleInputChange}  required />
                 </Form.Group>
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formHoraFin">
                     <Form.Label>Hora de Cierre</Form.Label>
-                    <Form.Control type="text" name="horaFin" value={horario.horaFin} onChange={handleInputChange} />
+                    <Form.Control type="text" name="horaFin" value={horario.horaFin} onChange={handleInputChange}   required/>
                 </Form.Group>
               
             </Row>
            <Row>
                 <Form.Group as={Col} >
                         <Form.Label htmlFor="doctor">Doctor Asignado:</Form.Label>
-                        <Form.Select id="doctor" name="codigo_doctor" value={horario.setDoctor} onChange={handleDoctorChange}>
+                        <Form.Select id="doctor" name="codigo_doctor" value={horario.setDoctor} onChange={handleDoctorChange}  required>
                             <option value="">Seleccione una opción...</option>
                             {doctor.map(doc => (
                                 <option key={doc.codigo_doctor} value={doc.codigo_doctor}>{doc.nombre} {doc.apellido}</option>

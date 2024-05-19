@@ -71,7 +71,7 @@ const DetailsPatients = () => {
                     <p className="card-text"><b>Nº de Historia Clínica:</b> {history.codigo_historia}</p>
                     <p className="card-text"><b>Diagnóstico:</b> {history.diagnostico}</p>
                     <p className="card-text"><b>Secuencia de Tratamiento:</b> {history.secuenciaTratamiento}</p>
-                    <p className="card-text"><b>Debe:</b> {history.debe}$</p>
+                   
                 </div>
             </div>
 

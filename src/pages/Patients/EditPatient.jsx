@@ -65,51 +65,51 @@ const EditPatientForm = () => {
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formNombre">
                     <Form.Label>Nombre</Form.Label>
-                    <Form.Control type="text" name="nombre" value={paciente.nombre} onChange={handleInputChange} />
+                    <Form.Control type="text" name="nombre" value={paciente.nombre} onChange={handleInputChange}  required/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formApellido">
                     <Form.Label>Apellido</Form.Label>
-                    <Form.Control type="text" name="apellido" value={paciente.apellido} onChange={handleInputChange} />
+                    <Form.Control type="text" name="apellido" value={paciente.apellido} onChange={handleInputChange}  required />
                 </Form.Group>
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formSexo">
                     <Form.Label>Sexo</Form.Label>
-                    <Form.Control type="text" name="sexo" value={paciente.sexo} onChange={handleInputChange} />
+                    <Form.Control type="text" name="sexo" value={paciente.sexo} onChange={handleInputChange}  required />
                 </Form.Group>
                 <Form.Group as={Col} controlId="formCedula">
                     <Form.Label>Cédula</Form.Label>
-                    <Form.Control type="text" name="cedula" value={paciente.cedula} onChange={handleInputChange} />
+                    <Form.Control type="text" name="cedula" value={paciente.cedula} onChange={handleInputChange}   required/>
                 </Form.Group>
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formEdad">
                     <Form.Label>Edad</Form.Label>
-                    <Form.Control type="text" name="edad" value={paciente.edad} onChange={handleInputChange} />
+                    <Form.Control type="text" name="edad" value={paciente.edad} onChange={handleInputChange}  required />
                 </Form.Group>
                 <Form.Group as={Col} controlId="formFecha_Nacimiento">
                     <Form.Label>Fecha Nacimiento</Form.Label>
-                    <Form.Control type="text" name="fecha_nacimiento" value={paciente.fecha_nacimiento} onChange={handleInputChange} />
+                    <Form.Control type="text" name="fecha_nacimiento" value={paciente.fecha_nacimiento} onChange={handleInputChange}  required />
                 </Form.Group>
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formDireccion">
                     <Form.Label>Dirección</Form.Label>
-                    <Form.Control type="text" name="direccion" value={paciente.direccion} onChange={handleInputChange} />
+                    <Form.Control type="text" name="direccion" value={paciente.direccion} onChange={handleInputChange}  required />
                 </Form.Group>
                 <Form.Group as={Col} controlId="formTelefono">
                     <Form.Label>Teléfono</Form.Label>
-                    <Form.Control type="text" name="telefono" value={paciente.telefono} onChange={handleInputChange} />
+                    <Form.Control type="text" name="telefono" value={paciente.telefono} onChange={handleInputChange}  required />
                 </Form.Group>
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formCorreoElectronico">
                     <Form.Label>Correo Electrónico</Form.Label>
-                    <Form.Control type="email" name="correoElectronico" value={paciente.correoElectronico} onChange={handleInputChange} />
+                    <Form.Control type="email" name="correoElectronico" value={paciente.correoElectronico} onChange={handleInputChange}  required />
                 </Form.Group>
                 <Form.Group as={Col} >
                         <Form.Label htmlFor="doctor">Doctor Asignado:</Form.Label>
-                        <Form.Select id="doctor" name="codigo_doctor" value={paciente.codigo_doctor} onChange={handleDoctorChange}>
+                        <Form.Select id="doctor" name="codigo_doctor" value={paciente.codigo_doctor} onChange={handleDoctorChange}  required>
                             <option value="">Seleccione una opción...</option>
                             {doctor.map(doc => (
                                 <option key={doc.codigo_doctor} value={doc.codigo_doctor}>{doc.nombre} {doc.apellido}</option>

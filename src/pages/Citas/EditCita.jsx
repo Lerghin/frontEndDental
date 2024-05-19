@@ -157,6 +157,7 @@ const handleDoctorChange = (event) => {
                   yearDropdownItemNumber={10}
                   scrollableMonthYearDropdown
                   className="form-control text-center"
+                  required
                 />
               </Form.Group>
               <Form.Group as={Col} controlId="formCedula">
@@ -166,6 +167,7 @@ const handleDoctorChange = (event) => {
                   name="cedula"
                   value={cedula}
                   onChange={handleCedulaChange}
+                  required
                 />
               </Form.Group>
             </Row>
@@ -197,6 +199,7 @@ const handleDoctorChange = (event) => {
                   name="motivo"
                   value={citas.motivo}
                   onChange={handleInputChange}
+                  required
                 />
               </Form.Group>
               <Form.Group as={Col} controlId="formObservaciones">
@@ -206,6 +209,7 @@ const handleDoctorChange = (event) => {
                   name="observaciones"
                   value={citas.observaciones}
                   onChange={handleInputChange}
+                  required
                 />
               </Form.Group>
               <Form.Group as={Col} controlId="formEstado">
@@ -214,6 +218,7 @@ const handleDoctorChange = (event) => {
                   name="estado"
                   value={citas.estado}
                   onChange={handleInputChange}
+                  required
                 >
                   <option value="">Seleccione una opción...</option>
                   <option value="Pendiente">Pendiente</option>
@@ -235,6 +240,7 @@ const handleDoctorChange = (event) => {
                   name="servicio"
                   value={citas.servicio.codigo_servicio}
                   onChange={handleServicioChange}
+                  required
                 >
                   <option value="">Seleccione Servicio</option>
                   {servicios.map((serv) => (

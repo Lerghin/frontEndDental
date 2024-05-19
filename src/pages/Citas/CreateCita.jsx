@@ -112,7 +112,7 @@ const CreateCita = () => {
             servicio: { codigo_servicio: userData.servicio },
             historiaClinica: userData.historiaClinica ? { historia_clinica_id: userData.historiaClinica } : null
         };
-        console.log("Datos a enviar:", citaData);
+        //console.log("Datos a enviar:", citaData);
         const { data } = await API.post("/citas/crear", citaData);
         console.log(data);
         toast.success(data.message);
@@ -120,7 +120,7 @@ const CreateCita = () => {
         navigate("/citas");
     } catch (error) {
         const { message } = error.response.data;
-        console.log(error);
+        //console.log(error);
         toast.error(message);
     }
 };
@@ -151,6 +151,7 @@ const CreateCita = () => {
               yearDropdownItemNumber={10}
               scrollableMonthYearDropdown
               className="form-control text-center"
+              required
             />
           </Form.Group>
           <Form.Group as={Col} controlId="formCedula">
@@ -160,6 +161,7 @@ const CreateCita = () => {
               name="cedula"
               value={cedula}
               onChange={handleCedulaChange}
+              required
             />
           </Form.Group>
           <Form.Group as={Col} controlId="formNombre">
@@ -189,6 +191,7 @@ const CreateCita = () => {
               name="motivo"
               value={userData.motivo}
               onChange={handleChange}
+              required
             />
           </Form.Group>
           <Form.Group as={Col} controlId="formObservaciones">
@@ -198,6 +201,7 @@ const CreateCita = () => {
               name="observaciones"
               value={userData.observaciones}
               onChange={handleChange}
+              required
             />
           </Form.Group >
           <Form.Group as={Col} controlId="formEstado">
@@ -206,6 +210,7 @@ const CreateCita = () => {
               name="estado"
               value={userData.estado}
               onChange={handleChange}
+              required
             >
               <option value="">Seleccione una opción...</option>
               <option value="Pendiente">Pendiente</option>
@@ -228,6 +233,7 @@ const CreateCita = () => {
             name="servicio"
             value={userData.servicio}
             onChange={handleChange}
+            required
           > 
             <option value="">Seleccione Servicio</option>
         {servicios.map(serv => (
@@ -244,6 +250,7 @@ const CreateCita = () => {
             name="unDoctor"
             value={userData.unDoctor}
             onChange={handleChange}
+            required
           > 
            <option value="">Seleccionar Doctor</option>
         {doctors.map(doc => (

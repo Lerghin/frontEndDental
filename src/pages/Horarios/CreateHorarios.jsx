@@ -65,6 +65,7 @@ const CreateHorarios = () => {
               name="diaSemana"
               value={userData.diaSemana}
               onChange={handleChange}
+              required
             >
               <option value="">Seleccione una opción...</option>
               <option value="Lunes">Lunes</option>
@@ -82,6 +83,7 @@ const CreateHorarios = () => {
               name="horaInicio"
               value={userData.horaInicio}
               onChange={handleChange}
+              required
             >
               <option value="">Seleccione una opción...</option>
               <option value="08:00am">08:00 AM</option>
@@ -96,6 +98,7 @@ const CreateHorarios = () => {
               name="horaFin"
               value={userData.horaFin}
               onChange={handleChange}
+              required
             >
               <option value="">Seleccione una opción...</option>
               <option value="12:00pm">12:00 PM</option>
@@ -109,6 +112,7 @@ const CreateHorarios = () => {
             name="codigo_doctor"
             value={userData.codigo_doctor}
             onChange={handleChange}
+            required
           >
             <option value="">Seleccione una opción...</option>
             {doctor.map((doc) => (

@@ -61,10 +61,9 @@ const Histories = () => {
              
               <th>Codigo_Historia</th>
               <th>Paciente</th>
-              <th>Doctor</th>
               <th>Diagnostico</th>
               <th>Secuencia_Tratamiento</th>
-              <th>Debe</th>
+        
            
               <th ></th>
             

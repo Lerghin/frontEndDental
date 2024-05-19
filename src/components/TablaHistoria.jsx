@@ -8,10 +8,10 @@ import { API } from "../utils/axios";
 const TablaHistoria = ({ data, onDelete }) => {
   const {
    codigo_historia,
-   debe,
+ 
    diagnostico,
    secuenciaTratamiento,
-   doctor,
+
    paciente,
   } = data;
   
@@ -35,14 +35,14 @@ const TablaHistoria = ({ data, onDelete }) => {
 
   return (    
     <tr>
-      <td className="namePatient">
-        <Link to={`/watchHistory/${codigo_historia}`}>{codigo_historia} </Link>
+      <td className="hover:bg-sky-100" >
+       {codigo_historia}
       </td>
-     <td className="hover:bg-sky-200"><Link to={`/watchPatient/${paciente.codigoPaciente}`}>{paciente.nombre}{paciente.apellido}  </Link></td>
-    <td className="hover:bg-sky-100"><Link to={`/watchDoctor/${doctor.codigo_doctor}`}>{doctor.nombre}{doctor.apellido }  </Link></td>
+     <td className="namePatient hover:bg-sky-100"><Link to={`/watchPatient/${paciente.codigoPaciente}`}>{paciente.nombre}{paciente.apellido}  </Link></td>
+   
     <td>{diagnostico}</td>
     <td>{secuenciaTratamiento}</td>
-    <td>{debe}$</td>
+   
      
      
     

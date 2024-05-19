@@ -28,6 +28,7 @@ import Citas from "./pages/Citas/Citas.jsx";
 import CreateCita from "./pages/Citas/CreateCita.jsx";
 import CitasByDay from "./pages/Citas/CitasByDay.jsx";
 import EditCita from "./pages/Citas/EditCita.jsx";
+import CreateHistoria from "./pages/HistoriasClinicas/CreateHistoria.jsx";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
         path: '/signup',
         element: <Signup />
       },
+      
 
     ]
   },
@@ -137,6 +139,11 @@ const router = createBrowserRouter([
       {
         path: '/editCita/:codigo_cita',
         element: <EditCita/>
+      }
+      ,
+      {
+        path: '/createHistory',
+        element: <CreateHistoria/>
       }
     ]
   }
