@@ -2,8 +2,11 @@ import { Link, useNavigate } from "react-router-dom";
 import "../pages/css/Home.css";
 
 import { MdDeleteForever } from "react-icons/md";
-import { API } from "../utils/axios";
 import { FaUserEdit } from "react-icons/fa";
+import { AiOutlineFilePdf } from "react-icons/ai"; 
+import { API } from "../utils/axios";
+import { generadorPDF } from "../pages/Administration/pdfGenerator";
+ // Importar la función generadora de PDF
 
 const TablaTransactions = ({ data, onDelete }) => {
   const {
@@ -34,9 +37,13 @@ const TablaTransactions = ({ data, onDelete }) => {
     }
   };
 
+  const handleGeneratePDF = () => {
+    generadorPDF(data, paciente, paciente.cedula);
+  };
+
   return (
     <tr>
-       <td>{codigo_transaccion}</td>
+      <td>{codigo_transaccion}</td>
       <td>{fecha}</td>
       <td className="namePatient">
         <Link to={`/watchPatient/${paciente.codigoPaciente}`}>
@@ -58,6 +65,10 @@ const TablaTransactions = ({ data, onDelete }) => {
         <MdDeleteForever
           className="m-2"
           onClick={() => handleDelete(codigo_transaccion)}
+        />
+        <AiOutlineFilePdf
+          className="m-2"
+          onClick={handleGeneratePDF}
         />
       </td>
     </tr>

@@ -13,7 +13,7 @@ import {
 
 
 
-const SideBarCitas= () => {
+const SideBarPresupuesto= () => {
   return (
     <>
      <div  style={{ display: 'flex', height: '100rem', overflow: 'scroll initial' }} >
@@ -29,16 +29,14 @@ const SideBarCitas= () => {
           <NavLink exact to="/homeadmin" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="home">Inicio</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/citas" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Citas</CDBSidebarMenuItem>
+            <NavLink exact to="/presupuesto" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="columns">Presupuestos</CDBSidebarMenuItem>
             </NavLink>
 
-            <NavLink exact to="/createCita" activeClassName="activeClicked">
-              <CDBSidebarMenuItem  icon="file-upload">Registrar Citas </CDBSidebarMenuItem>
+            <NavLink exact to="/createPresu" activeClassName="activeClicked">
+              <CDBSidebarMenuItem  icon="file-upload">Crear Presupuesto </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/citaDay" activeClassName="activeClicked">
-              <CDBSidebarMenuItem  icon="file-upload">Citas del día </CDBSidebarMenuItem>
-            </NavLink>
+           
           
            
           </CDBSidebarMenu>
@@ -61,6 +59,6 @@ const SideBarCitas= () => {
   )
 }
 
-export default SideBarCitas
+export default SideBarPresupuesto
 
 

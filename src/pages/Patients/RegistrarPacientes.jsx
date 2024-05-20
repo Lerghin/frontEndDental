@@ -1,212 +1,197 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-
-import { toast } from "react-toastify"
-import SideBarPacientes from "../../components/SideBarPacientes"
-import axios from "axios"
-import  './../css/RegistroPaciente.css'
-import "react-datepicker/dist/react-datepicker.css";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import SideBarPacientes from "../../components/SideBarPacientes";
+import axios from "axios";
 import DatePicker from "react-datepicker";
-import { API } from "../../utils/axios"
-import '../css/RegistroPaciente.css'
+import { API } from "../../utils/axios";
+import { Container, Form, Button, Row, Col } from "react-bootstrap";
+import "react-datepicker/dist/react-datepicker.css";
+import "../css/RegistroPaciente.css";
+
 const RegistrarPacientes = () => {
+  const [doctor, setDoctor] = useState([]);
+  const [userData, setUserData] = useState({
+    nombre: "",
+    apellido: "",
+    sexo: "",
+    cedula: "",
+    direccion: "",
+    telefono: "",
+    correoElectronico: "",
+    codigo_doctor: "",
+    fecha_nacimiento: new Date(),
+  });
+  const navigate = useNavigate();
 
-    const [doctor, setDoctor]= useState([]);
-    const [userData, setUserData]= useState({
-        nombre:'',
-        apellido:'',
-        sexo:'',
-        cedula:'',
-       
-        direccion: '',
-        telefono: '',
-        correoElectronico: '',
-        codigo_doctor:'',
-        fecha_nacimiento: new Date(),
-    })
-    const navigate= useNavigate()
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/doctor/traer")
+      .then((response) => {
+        setDoctor(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching options:", error);
+      });
+  }, []);
 
-    useEffect(() => {
+  const handleChangeDate = (date) => {
+    setUserData({ ...userData, fecha_nacimiento: date });
+  };
 
-        axios.get('http://localhost:8080/doctor/traer')
-          .then(response => {
-           
-            setDoctor(response.data);
-            //console.log(response.data)
-          })
-          .catch(error => {
-            console.error('Error fetching options:', error);
-          });
-      }, []); 
-    
-      const handleChangeDate = (date) => {
-        setUserData({ ...userData, fecha_nacimiento: date });
-      };
-    const handleChange= (e)=>{
-        setUserData({...userData, [e.target.name]:e.target.value})
-    
+  const handleChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const { data } = await API.post("/pacientes/crear/", userData);
+      toast.success(data.message);
+      alert("Paciente Registrado con éxito");
+      navigate("/patients");
+    } catch (error) {
+      const { message } = error.response.data;
+      toast.error(message);
     }
-    const handleSubmit= async()=>{
-        try{
-          console.log(userData.fecha_nacimiento);
-            const {data}= await API.post('/pacientes/crear/', userData)
-            console.log(data)
-            toast.success(data.message)
-            alert("Paciente Registrado con éxito")
-            navigate('/patients')
-        }catch (error){
-            const {message}=error.response.data
-            console.log(error)
-            toast.error(message)
-        }
-    }
+  };
+
   return (
-    <>
     <div className="home">
       <div>
         <SideBarPacientes className="home-sidebar" />
       </div>
-   
-    <div className="registrar p-8"> 
-        
-    <div className="sign-container">
-  
-    <div className="sign-card">
-      <form className="sign-form" onSubmit={(e) => e.preventDefault()}>
-        <h2 className="form-heading">Registrar Paciente</h2>
+      <Container className="registrar p-8">
+        <div className="sign-container">
+          <div className="sign-card">
+            <Form className="sign-form" onSubmit={(e) => e.preventDefault()}>
+              <h2 className="form-heading">Registrar Paciente</h2>
 
-        <div className="form-group">
-          <label htmlFor="nombre" className="form-label">Nombre</label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            value={userData.nombre}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Ingresa nombre"
-            autoComplete="off"
-            required
-          />
-        </div>
+              <Row className="mb-3">
+                <Form.Group as={Col} controlId="formNombre">
+                  <Form.Label>Nombre</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="nombre"
+                    value={userData.nombre}
+                    onChange={handleChange}
+                    placeholder="Ingresa nombre"
+                    required
+                  />
+                </Form.Group>
 
-        <div className="form-group">
-          <label htmlFor="apellido" className="form-label">Apellido</label>
-          <input
-            type="text"
-            id="apellido"
-            name="apellido"
-            value={userData.apellido}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Ingresa apellido"
-            autoComplete="off"
-            required
-          />
-        </div>
+                <Form.Group as={Col} controlId="formApellido">
+                  <Form.Label>Apellido</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="apellido"
+                    value={userData.apellido}
+                    onChange={handleChange}
+                    placeholder="Ingresa apellido"
+                    required
+                  />
+                </Form.Group>
+              </Row>
 
-        <div className="form-group">
-          <label htmlFor="sexo" className="form-label">Sexo</label>
-          <select  id="sexo" name="sexo" value={userData.sexo} onChange={handleChange}>
-        <option  type="text" value="">Seleccione una opción...</option>
-        <option type="text" value="Masculino">Masculino</option>
-        <option  type="text" value="Femenino">Femenino</option>
-        </select>
-        </div>
+              <Row className="mb-3">
+                <Form.Group as={Col} controlId="formSexo">
+                  <Form.Label>Sexo</Form.Label>
+                  <Form.Select name="sexo" value={userData.sexo} onChange={handleChange} required>
+                    <option value="">Seleccione</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                  </Form.Select>
+                </Form.Group>
 
-        <div className="form-group">
-          <label htmlFor="cedula" className="form-label">Cedula</label>
-          <input
-            type="text"
-            id="cedula"
-            name="cedula"
-            value={userData.cedula}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Ingrese su Cedula"
-            required
-          />
-        </div>
-      
-        <div className="form-group">
-                  <label htmlFor="fecha_nacimiento" className="form-label">
-                    Fecha de Nacimiento
-                  </label>
-                  
-                  <DatePicker
-          id="fecha_nacimiento"
-          selected={userData.fecha_nacimiento}
-          onChange={handleChangeDate}
-          dateFormat="yyyy-MM-dd"
-          placeholderText="Seleccionar fecha"
-          showYearDropdown
-          scrollableYearDropdown
-          yearDropdownItemNumber={100}
-          scrollableMonthYearDropdown
-          className="form-control text-center"
-        />
-                </div>
-        <div className="form-group">
-          <label htmlFor="direccion" className="form-label">Dirección</label>
-          <textarea
-            type="text"
-            id="direccion"
-            name="direccion"
-            value={userData.direccion}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Ingrese su Dirección"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="telefono" className="form-label">Teléfono</label>
-          <input
-            type="text"
-            id="telefono"
-            name="telefono"
-            value={userData.telefono}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Ingrese num teléfono"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="correo" className="form-label">Correo</label>
-          <input
-            type="email"
-            id="correo"
-            name="correoElectronico"
-            value={userData.correoElectronico}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Ingrese su email"
-            required
-          />
-        </div>
-        <label htmlFor="doctor">Doctor Asignado:</label>
-      <select id="doctor" name="codigo_doctor" value={userData.codigo_doctor} onChange={handleChange}>
-        <option value="">Seleccione una opción...</option>
-        {doctor.map(doc => (
-          <option key={doc.codigo_doctor} value={doc.codigo_doctor}>{doc.nombre} {doc.apellido}</option>
-        ))}
-      </select>
+                <Form.Group as={Col} controlId="formCedula">
+                  <Form.Label>Cédula</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="cedula"
+                    value={userData.cedula}
+                    onChange={handleChange}
+                    placeholder="Ingrese su Cédula"
+                    required
+                  />
+                </Form.Group>
+              </Row>
 
-        <div className="form-actions">
-          <button type="button" className="btn btn-secondary" onClick={handleSubmit}>
-            Registrar
-          </button>
-          
+              <Form.Group className="mb-3" controlId="formFechaNacimiento">
+                <Form.Label>Fecha de Nacimiento</Form.Label>
+                <DatePicker
+                  selected={userData.fecha_nacimiento}
+                  onChange={handleChangeDate}
+                  dateFormat="yyyy-MM-dd"
+                  maxDate={new Date()}
+                  placeholderText="Seleccionar fecha"
+                  showYearDropdown
+                  scrollableYearDropdown
+                  yearDropdownItemNumber={100}
+                  scrollableMonthYearDropdown
+                  className="form-control"
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formDireccion">
+                <Form.Label>Dirección</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  name="direccion"
+                  value={userData.direccion}
+                  onChange={handleChange}
+                  placeholder="Ingrese su Dirección"
+                  required
+                />
+              </Form.Group>
+
+              <Row className="mb-3">
+                <Form.Group as={Col} controlId="formTelefono">
+                  <Form.Label>Teléfono</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="telefono"
+                    value={userData.telefono}
+                    onChange={handleChange}
+                    placeholder="Ingrese num teléfono"
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formCorreo">
+                  <Form.Label>Correo</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="correoElectronico"
+                    value={userData.correoElectronico}
+                    onChange={handleChange}
+                    placeholder="Ingrese su email"
+                    required
+                  />
+                </Form.Group>
+              </Row>
+
+              <Form.Group className="mb-3" controlId="formDoctor">
+                <Form.Label>Doctor Asignado</Form.Label>
+                <Form.Select name="codigo_doctor" value={userData.codigo_doctor} onChange={handleChange} required>
+                  <option value="">Seleccione una opción...</option>
+                  {doctor.map((doc) => (
+                    <option key={doc.codigo_doctor} value={doc.codigo_doctor}>
+                      {doc.nombre} {doc.apellido}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+
+              <div className="form-actions">
+                <Button variant="secondary" onClick={handleSubmit}>
+                  Registrar
+                </Button>
+              </div>
+            </Form>
+          </div>
         </div>
-      </form>
+      </Container>
     </div>
-  </div>
-  </div>
-  
-  </div>
-  </>
-  )
-}
+  );
+};
 
-export default RegistrarPacientes
+export default RegistrarPacientes;

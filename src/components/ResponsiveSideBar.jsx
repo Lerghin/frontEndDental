@@ -43,6 +43,9 @@ const ResponsiveSideBar = () => {
             <NavLink exact to="/createHorarios" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="file-alt">Crear Horarios</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/createPresupuesto" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="file-alt">Crear Presupuesto</CDBSidebarMenuItem>
+            </NavLink>
           
            
             <NavLink exact to="/createUser" activeClassName="activeClicked">

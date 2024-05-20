@@ -21,9 +21,9 @@ const Transactions = () => {
       .then((response) => {
         const fetchedCitas = response.data;
      
-        const sortedCitas = fetchedCitas.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-        setTrans(sortedCitas);
-        setResults(sortedCitas);
+      
+        setTrans(fetchedCitas);
+        setResults(fetchedCitas);
       })
       .catch((error) => console.error("Error fetching citas:", error));
   }, []);
@@ -61,6 +61,7 @@ const Transactions = () => {
   };
 
   const handleDelete = (codigo_transaccion) => {
+    
     setResults((prevResults) =>
       prevResults.filter((trans) => trans.codigo_transaccion !== codigo_transaccion)
     );

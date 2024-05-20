@@ -32,6 +32,11 @@ import CreateHistoria from "./pages/HistoriasClinicas/CreateHistoria.jsx";
 import EditHistoria from "./pages/HistoriasClinicas/EditHistoria.jsx";
 import Transactions from "./pages/Administration/Transactions.jsx";
 import CreateTrans from "./pages/Administration/CreateTrans.jsx";
+import EditTrans from "./pages/Administration/EditTrans.jsx";
+import Presupuestos from "./pages/Presupuestos/Presupuestos.jsx";
+import CreatePresu from "./pages/Presupuestos/CreatePresu.jsx";
+import EditPresu from "./pages/Presupuestos/EditPresu.jsx";
+import DetailsPresu from "./pages/Presupuestos/DetailsPresu.jsx";
 
 const router = createBrowserRouter([
   {
@@ -160,7 +165,29 @@ const router = createBrowserRouter([
       {
         path: '/createTrans',
         element: <CreateTrans/>
+      },
+      {
+        path: '/editTrans/:codigo_transaccion',
+        element: <EditTrans/>
       }
+      ,
+      {
+        path: '/presupuesto',
+        element: <Presupuestos/>
+      },
+      {
+        path: '/createPresu',
+        element: <CreatePresu/>
+      },
+      {
+        path: '/editPre/:codigo_presupuesto',
+        element: <EditPresu/>
+      },
+      {
+        path: '/watchPresu/:codigo_presupuesto',
+        element: <DetailsPresu/>
+      }
+
     ]
   }
 ])

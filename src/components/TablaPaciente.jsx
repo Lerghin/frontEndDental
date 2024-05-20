@@ -38,6 +38,8 @@ const TablaPaciente = ({ data, onDelete }) => {
     }
   };
 
+  
+
   return (    
     <tr>
       <td className="namePatient">
@@ -54,7 +56,7 @@ const TablaPaciente = ({ data, onDelete }) => {
       <FaUserEdit className="m-2 my-2 h-5" onClick={() => navigate(`/editPatient/${codigo_paciente}`)}  /> 
       
         <MdDeleteForever className="m-2 "  onClick={()=>handleDelete(codigo_paciente) }/>
-  
+       
       </td>
     </tr>
   );
