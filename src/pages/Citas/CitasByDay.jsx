@@ -35,7 +35,7 @@ const CitasByDay = () => {
       </div>
       <div className="patientsTable">
         <div  className="flex-container responsive-table">
-        {message && <p><b>{message}</b></p>}
+        {message && <p className="noHay"><b>{message}</b></p>}
         <br></br>
         {citas.length > 0 ? (
           
@@ -68,7 +68,9 @@ const CitasByDay = () => {
             </tbody>
           </Table>
         ) : (
-          <p>No hay citas para hoy.</p>
+         
+          <p ></p>
+         
         )}
         </div>
         <div  id="buttons-container" className='d-flex  justify-center gap-5 p-4 h-100vh'>

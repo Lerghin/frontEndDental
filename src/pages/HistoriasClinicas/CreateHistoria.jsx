@@ -7,6 +7,7 @@ import { API } from "../../utils/axios";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidSave } from "react-icons/bi";
 import "../css/RegistroPaciente.css";
+import SideBarHistorias from "../../components/SideBarHistorias";
 
 const CreateHistoria = () => {
   const [doctores, setDoctores] = useState([]);
@@ -107,6 +108,10 @@ const CreateHistoria = () => {
   };
 
   return (
+    <div className="home">
+    <div>
+      <SideBarHistorias className="home-sidebar" />
+    </div>
     <Container>
       <h1 className="text-center font-bold my-10">Crear Historia</h1>
       <Form onSubmit={handleSubmit}>
@@ -180,6 +185,7 @@ const CreateHistoria = () => {
         </div>
       </Form>
     </Container>
+    </div>
   );
 };
 

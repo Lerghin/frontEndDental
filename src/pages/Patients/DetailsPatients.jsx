@@ -12,20 +12,25 @@ const DetailsPatients = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [history, setHistory]= useState(null);
+    const [debe, setDebe]= useState(null);
 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [patientResponse, citasResponse, historyResponse] = await Promise.all([
+                const [patientResponse, citasResponse, historyResponse, debeResponse] = await Promise.all([
                     axios.get(`http://localhost:8080/pacientesdr/traer/${params.codigo_paciente}`),
                     axios.get(`http://localhost:8080/pacientescita/traer/${params.codigo_paciente}`),
-                    axios.get(`http://localhost:8080/pacienteshistory/traer/${params.codigo_paciente}`)
+                    axios.get(`http://localhost:8080/pacienteshistory/traer/${params.codigo_paciente}`),
+                    axios.get(`http://localhost:8080/total-debe/${params.codigo_paciente}`)
                 ]);
 
                 setPatient(patientResponse.data);
                 setCitas(citasResponse.data);
                 setHistory(historyResponse.data);
+                setDebe(debeResponse.data);
+        
+
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -44,7 +49,7 @@ const DetailsPatients = () => {
         return <p>Error: {error}</p>;
     }
 
-    if (!patient || !history || !citas) {
+    if (!patient || !history || !citas || debe === null) {
         return <p>No se encontró información del paciente.</p>;
     }
 
@@ -69,6 +74,8 @@ const DetailsPatients = () => {
                     <p className="card-text"><b>Email:</b> {patient.correoElectronico}</p>
                     <p className="card-text"><b>Medico Tratante:</b> {patient.nombreDoctor} {patient.apellidoDoctor}</p>
                     <p className="card-text"><b>Nº de Historia Clínica:</b> {history.codigo_historia}</p>
+                    <p className="card-text"><b >Deuda del Paciente:</b>  <span className='text-pink-700 font-semibold'> {debe}$</span></p> 
+                    <p className='card-text text-gray-500'>Nota: Sí el valor es negativo quiere decir que el paciente tiene saldo a favor</p>
                     <p className="card-text"><b>Diagnóstico:</b> {history.diagnostico}</p>
                     <p className="card-text"><b>Secuencia de Tratamiento:</b> {history.secuenciaTratamiento}</p>
                    

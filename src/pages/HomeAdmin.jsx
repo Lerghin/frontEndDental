@@ -87,7 +87,7 @@ const Home = () => {
               Control Administrativo Dental Briceño 
             </Card.Text>
             <br></br>
-            <Button onClick={() => navigate('/signin')} variant="btn btn-secondary" >Ir</Button>
+            <Button onClick={() => navigate('/transaction')} variant="btn btn-secondary" >Ir</Button>
           </Card.Body>
         </Card>
     

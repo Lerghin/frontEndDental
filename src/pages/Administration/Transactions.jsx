@@ -2,25 +2,27 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import "../css/Home.css";
-import SideBarCitas from "../../components/SideBarCitas.jsx";
-import TablaCitas from "../../components/TablaCitas.jsx";
+
+
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import TablaTransactions from "../../components/TablaTransactiosn.jsx";
+import SideBarTrans from "../../components/SideBarTrans.jsx";
 
-const Citas = () => {
-  const [citas, setCitas] = useState([]);
+const Transactions = () => {
+  const [trans, setTrans] = useState([]);
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/citas/traer")
+      .get("http://localhost:8080/trans/traer")
       .then((response) => {
         const fetchedCitas = response.data;
-        // Sort by date from today to the past
-        const sortedCitas = fetchedCitas.sort((a, b) => new Date(b.fecha_cita) - new Date(a.fecha_cita));
-        setCitas(sortedCitas);
+     
+        const sortedCitas = fetchedCitas.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+        setTrans(sortedCitas);
         setResults(sortedCitas);
       })
       .catch((error) => console.error("Error fetching citas:", error));
@@ -30,19 +32,16 @@ const Citas = () => {
     const searchTerm = e.target.value.toLowerCase();
     setSearch(searchTerm);
 
-    const filteredCitas = citas.filter(
+    const filteredCitas = trans.filter(
       (pat) =>
-        pat.fecha_cita.toString().includes(searchTerm) ||
-        pat.motivo.toLowerCase().includes(searchTerm) ||
-        pat.unPaciente.nombre.toLowerCase().includes(searchTerm) ||
-        pat.unPaciente.apellido.toLowerCase().includes(searchTerm) ||
-        pat.unPaciente.cedula.toString().includes(searchTerm) ||
-        pat.unDoctor.nombre.toLowerCase().includes(searchTerm) ||
-        pat.unDoctor.apellido.toLowerCase().includes(searchTerm) ||
-        pat.servicio.nombre.toLowerCase().includes(searchTerm) ||
-        pat.estado.toLowerCase().includes(searchTerm)
+        pat.fecha.toString().includes(searchTerm) ||
+    
+        pat.paciente.nombre.toLowerCase().includes(searchTerm) ||
+        pat.paciente.apellido.toLowerCase().includes(searchTerm) ||
+        pat.paciente.cedula.toString().includes(searchTerm)
+
     );
-    setResults(searchTerm.trim() === "" ? citas : filteredCitas);
+    setResults(searchTerm.trim() === "" ? trans : filteredCitas);
   };
 
   const handleDateChange = (date) => {
@@ -51,29 +50,29 @@ const Citas = () => {
     if (date) {
       const formattedDate = date.toISOString().split("T")[0];
 
-      const filteredCitas = citas.filter((cita) => {
-        return cita.fecha_cita.includes(formattedDate);
+      const filteredCitas = trans.filter((trans) => {
+        return trans.fecha.includes(formattedDate);
       });
 
       setResults(filteredCitas);
     } else {
-      setResults(citas);
+      setResults(trans);
     }
   };
 
-  const handleDelete = (codigo_cita) => {
+  const handleDelete = (codigo_transaccion) => {
     setResults((prevResults) =>
-      prevResults.filter((cita) => cita.codigo_cita !== codigo_cita)
+      prevResults.filter((trans) => trans.codigo_transaccion !== codigo_transaccion)
     );
-    setCitas((prevCitas) =>
-      prevCitas.filter((cita) => cita.codigo_cita !== codigo_cita)
+    setTrans((prevCitas) =>
+      prevCitas.filter((cita) => cita.codigo_transaccion !== codigo_transaccion)
     );
   };
 
   return (
     <div className="home">
       <div>
-        <SideBarCitas />
+        <SideBarTrans />
       </div>
 
       <div className="patientsTable">
@@ -103,8 +102,7 @@ const Citas = () => {
             data-placement="top"
             title="Opciones de búsqueda: Fecha, Doctor, Motivo, Paciente"
           >
-            Recuerda: Puedes buscar por fecha, por doctor, por motivo y por
-            paciente
+            Recuerda: Puedes buscar por fecha, por nombre del paciente, por cedula
           </span>
           <br />
         </div>
@@ -113,22 +111,24 @@ const Citas = () => {
             <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th>Fecha Cita</th>
+                 <th>Nº de Recibo</th>
+                  <th>Fecha</th>
                   <th>Nombre y Apellido del Paciente</th>
                   <th>Cedula</th>
-                  <th>Doctor Asignado a la Cita</th>
-                  <th>Tipo de Servicio</th>
-                  <th>Motivo</th>
+                  <th>Saldo Deudor</th>
+                  <th>Monto Cancelado</th>
+                  <th>Met. de Pago</th>
                   <th>Observaciones</th>
-                  <th>Estado</th>
+                  <th>% Doctor</th>
+                  <th>% Clínica</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                {results.map((cita) => (
-                  <TablaCitas
-                    key={cita.codigo_cita}
-                    data={cita}
+                {results.map((trans) => (
+                  < TablaTransactions
+                    key={trans.codigo_transaccion}
+                    data={trans}
                     onDelete={handleDelete}
                   />
                 ))}
@@ -143,4 +143,4 @@ const Citas = () => {
   );
 };
 
-export default Citas;
+export default Transactions;

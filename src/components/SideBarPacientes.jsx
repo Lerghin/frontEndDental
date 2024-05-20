@@ -35,6 +35,10 @@
                 <NavLink exact to="/createPatients" activeClassName="activeClicked">
                   <CDBSidebarMenuItem icon="user">Registrar Paciente</CDBSidebarMenuItem>
                 </NavLink>
+                <NavLink exact to="/createCita" activeClassName="activeClicked">
+              <CDBSidebarMenuItem  icon="file-upload">Registrar Citas </CDBSidebarMenuItem>
+            </NavLink>
+           
               
                
               </CDBSidebarMenu>

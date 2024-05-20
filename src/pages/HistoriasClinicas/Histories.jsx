@@ -30,9 +30,9 @@ const Histories = () => {
     setSearch(searchTerm);
     console.log(searchTerm);
     const filteredHistories= histories.filter(hist=> 
-    hist.codigo_historia.toLowerCase().includes(searchTerm)||
-    hist.diagnotico.toLowerCase().includes(searchTerm)||
-    hist.nombrePaciente.toString().includes(searchTerm)
+    hist.codigo_historia.toString().includes(searchTerm)||
+    hist.diagnostico.toLowerCase().includes(searchTerm)||
+    hist.paciente.nombre.toLowerCase().includes(searchTerm)
   
 
     );
@@ -52,7 +52,7 @@ const Histories = () => {
 
       <div className="patientsTable">
       <div>
-        <input style={{textAlign:"center"}} value={search} onChange={searcher} type="text" placeholder='Buscar Paciente' className='form-control' />
+        <input style={{textAlign:"center"}} value={search} onChange={searcher} type="text" placeholder='Buscar historia' className='form-control' />
       </div>
       <div className="flex-container responsive-table">
         <Table striped bordered hover>
