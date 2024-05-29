@@ -22,7 +22,7 @@ const TablaHistoria = ({ data, onDelete }) => {
   const handleDelete = async (codigo_historia) => {
     if (window.confirm("¿Seguro que quieres  borrar la Historia?")) {
       try {
-        await API.delete(`/historias/borrar/${codigo_historia}`);
+        await API.delete(`admin/historias/borrar/${codigo_historia}`);
         onDelete(codigo_historia); 
         navigate('/histories')
        

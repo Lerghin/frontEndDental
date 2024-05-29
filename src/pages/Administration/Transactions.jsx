@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 import Table from "react-bootstrap/Table";
 import "../css/Home.css";
 
@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import TablaTransactions from "../../components/TablaTransactiosn.jsx";
 import SideBarTrans from "../../components/SideBarTrans.jsx";
+import { API } from "../../utils/axios.js";
 
 const Transactions = () => {
   const [trans, setTrans] = useState([]);
@@ -16,7 +17,7 @@ const Transactions = () => {
   const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
-    axios
+    API
       .get("http://localhost:8080/trans/traer")
       .then((response) => {
         const fetchedCitas = response.data;

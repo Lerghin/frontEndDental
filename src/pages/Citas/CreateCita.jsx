@@ -43,7 +43,7 @@ const CreateCita = () => {
     setCedula(cedulaValue);
 
     if (cedulaValue.length >= 8) {
-      axios
+      API
         .get(`http://localhost:8080/pacientes/traerbycedula/${cedulaValue}`)
         .then((response) => {
           if (response.data) {

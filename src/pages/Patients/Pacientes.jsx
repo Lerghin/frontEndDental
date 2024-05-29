@@ -1,51 +1,53 @@
 import { useState, useEffect } from "react";
-import SideBarPacientes from ".././../components/SideBarPacientes";
-import axios from "axios";
+import SideBarPacientes from "../../components/SideBarPacientes";
+
 import TablaPaciente from "../../components/TablaPaciente";
-import Table from "react-bootstrap/Table"; // Asegúrate de importar la tabla
+import Table from "react-bootstrap/Table";
 import "../css/Home.css";
+import { API } from "../../utils/axios";
 
 const Pacientes = () => {
   const [pacientes, setPacientes] = useState([]);
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [sortedPacientes, setSortedPacientes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    try{
-    axios
-      .get("http://localhost:8080/pacientesdr/traer")
-      .then((response) => {
+    const fetchPacientes = async () => {
+      try {
+        const response = await API.get("/pacientesdr/traer");
         const fetchedPat = response.data;
         setPacientes(fetchedPat);
-        console.log(fetchedPat);
         setResults(fetchedPat);
         setSortedPacientes(fetchedPat.sort((a, b) => a.nombre.localeCompare(b.nombre)));
-      })
-     } catch (error) {
+      } catch (error) {
+        console.error('Error fetching patients:', error); // Log de error
         setError(error.message);
-    } finally {
+      } finally {
         setLoading(false);
-    }
+      }
+    };
+
+    fetchPacientes();
   }, []);
+
   if (loading) {
     return <p>Cargando...</p>;
-}
+  }
 
-if (error) {
+  if (error) {
     return <p>Error: {error}</p>;
-}
+  }
 
-if (!pacientes || !results) {
+  if (!pacientes || !results) {
     return <p>No se encontró información del paciente.</p>;
-}
+  }
+
   const searcher = (e) => {
     const searchTerm = e.target.value.toLowerCase();
     setSearch(searchTerm);
-    console.log(searchTerm);
 
     const filteredPatients = pacientes.filter(
       (pat) =>

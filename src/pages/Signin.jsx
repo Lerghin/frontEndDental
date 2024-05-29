@@ -1,35 +1,55 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { API } from "../utils/axios";
 import { toast } from 'react-toastify';
 import '../pages/css/Signup.css';
+import { LS } from "../utils/LS";
+import { useDispatch } from 'react-redux';
+import { login } from "./Store/Actions/authActions";
+import { API } from "../utils/axios";
+
 const Signin = () => {
   const navigate = useNavigate();
   const inputUsername = useRef();
   const inputPass = useRef();
+  const dispatch = useDispatch();
 
-  const handleSubmit = async () => {
+  useEffect(() => {
+    const token = LS.getText('token');
+    if (token) {
+      dispatch(login({ token }));
+      navigate('/homeadmin');
+    }
+  }, [dispatch, navigate]); // <- Se pasa un array vacío como segundo argumento
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Evita el comportamiento predeterminado del formulario
+
+    const userData = {
+      username: inputUsername.current.value,
+      password: inputPass.current.value,
+    };
+
     try {
-        const userData={
-            username: inputUsername.current.value,
-            password: inputPass.current.value,
-        } 
-        const {data}= await API.post('/auth/login', userData)
-        console.log(data);
-       toast.success(data.message)
-       navigate('/')
-    
+      const res = await API.post('/auth/login', userData);
+     
+      dispatch(login(res.data));
 
+      if (res.status === 200) {
+        toast.success('You are logged in successfully');
+        const { token } = res.data;
+        LS.set('token', token);
+        navigate('/homeadmin');
+      }
     } catch (error) {
-        const {message}= error.response.data
-        console.log(error)
-        toast.error(message)
+      toast.error('Login failed');
+      console.error(error);
     }
   };
+
   return (
     <div className="signup-container">
       <div className="signup-card">
-        <form className="signup-form" >
+        <form className="signup-form" onSubmit={handleSubmit}>
           <h2 className="form-heading">Iniciar Sesion</h2>
 
           <div className="form-group">
@@ -38,8 +58,8 @@ const Signin = () => {
               type="text"
               id="username"
               name="username"
-              // ... other input attributes (autoComplete, required)
               ref={inputUsername}
+              required
             />
           </div>
 
@@ -49,13 +69,13 @@ const Signin = () => {
               type="password"
               id="password"
               name="password"
-              // ... other input attributes (required)
               ref={inputPass}
+              required
             />
           </div>
 
           <div className="form-actions">
-            <button onClick={handleSubmit} type="submit" className="btn btn-secondary">
+            <button type="submit" className="btn btn-secondary">
               Login
             </button>
           </div>

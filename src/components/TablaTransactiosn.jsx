@@ -26,7 +26,7 @@ const TablaTransactions = ({ data, onDelete }) => {
   const handleDelete = async (codigo_transaccion) => {
     if (window.confirm("¿Seguro que quieres borrar la transacción?")) {
       try {
-        await API.delete(`/trans/borrar/${codigo_transaccion}`);
+        await API.delete(`/admin/trans/borrar/${codigo_transaccion}`);
 
         onDelete(codigo_transaccion);
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SideBarDoctores from "../../components/SidebarDoctores";
 
 import DatePicker from "react-datepicker";
-import axios from "axios";
+
 import { API } from "../../utils/axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,8 @@ const RegistrarDoctor = () => {
   const [horarios, setHorarios] = useState(null);
   const navigate=useNavigate();
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/horarios/traer")
+    API
+      .get("http://localhost:8080/onlyhorarios/traer")
       .then((response) => {
         setHorarios(response.data);
         console.log(response.data)

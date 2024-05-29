@@ -6,7 +6,7 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidSave } from "react-icons/bi";
 import { API } from "../../utils/axios";
 import DatePicker from "react-datepicker";
-import axios from "axios";
+
 import jsPDF from "jspdf";
 import "./../css/RegistroPaciente.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -42,7 +42,7 @@ const CreateTrans = () => {
     setCedula(cedulaValue);
 
     if (cedulaValue.length >= 8) {
-      axios
+      API
         .get(`http://localhost:8080/pacientes/traerbycedula/${cedulaValue}`)
         .then((response) => {
           if (response.data) {

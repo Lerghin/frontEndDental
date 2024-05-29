@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
-import axios from "axios";
 
 import Table from "react-bootstrap/Table"; // Asegúrate de importar la tabla
 import "../css/Home.css";
 import TablaHorario from "../../components/TablaHorario";
 import SideBarHorarios from "../../components/SideBarHorarios";
+import { API } from "../../utils/axios";
 
 
 const Horarios = () => {
@@ -13,7 +13,7 @@ const Horarios = () => {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
   useEffect(() => {
-    axios
+    API
       .get("http://localhost:8080/horarios/traer")
       .then((response) => {
  

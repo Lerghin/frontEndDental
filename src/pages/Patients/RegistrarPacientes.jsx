@@ -25,7 +25,7 @@ const RegistrarPacientes = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
+    API
       .get("http://localhost:8080/doctor/traer")
       .then((response) => {
         setDoctor(response.data);

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
 
-import axios from "axios";
+
 import "./../css/RegistroPaciente.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { RiArrowGoBackFill } from "react-icons/ri";
@@ -21,7 +21,7 @@ const CreateHorarios = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
+    API
       .get("http://localhost:8080/doctor/traer")
       .then((response) => {
         setDoctor(response.data);

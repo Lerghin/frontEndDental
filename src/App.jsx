@@ -1,10 +1,10 @@
-import {  RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Navigate, Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Signin from "./pages/Signin.jsx";
 
-import HomeAdmin from  "./pages/HomeAdmin.jsx";
+import HomeAdmin from "./pages/HomeAdmin.jsx";
 import Signup from "./pages/Signup";
 import LayoutAdmin from "./layouts/LayoutAdmin.jsx";
 import Pacientes from "./pages/Patients/Pacientes.jsx";
@@ -37,172 +37,173 @@ import Presupuestos from "./pages/Presupuestos/Presupuestos.jsx";
 import CreatePresu from "./pages/Presupuestos/CreatePresu.jsx";
 import EditPresu from "./pages/Presupuestos/EditPresu.jsx";
 import DetailsPresu from "./pages/Presupuestos/DetailsPresu.jsx";
+import { Provider, useSelector } from "react-redux";
+import store from '../src/pages/Store/store.js';
+
+const ProtectedRoute = () => {
+  const status = useSelector(state => state.clinica.status);
+  if (status === "online") {
+    return <Outlet />;
+  }
+  return <Navigate to='/' />;
+};
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
     children: [
-    
       {
         path: '/',
-        element: <Signin/>
+        element: <Signin />
       },
       {
         path: '/signup',
         element: <Signup />
       },
-      
-
     ]
   },
   {
     path: '/',
-    element: <LayoutAdmin />,
+    element: <ProtectedRoute />,
     children: [
-    
       {
-        path: '/homeadmin',
-        element: <HomeAdmin/>
-      },
-      {
-        path: '/signup',
-        element: <Signup />
-      },
-      {
-        path: '/patients',
-        element: <Pacientes />
-      },
-      {
-        path: '/createPatients',
-        element: <RegistrarPacientes />
-      },
-      {
-        path: '/watchPatient/:codigo_paciente',
-        element: <DetailsPatients />
-      },
-      {
-        path: '/editPatient/:codigo_paciente',
-        element: <EditPatient />
-      },
-      {
-        path: '/doctors',
-        element: <Doctors />
-      },
-      {
-        path: '/watchDoctor/:codigo_doctor',
-        element: <DetailsDoctor/>
-      },
-      {
-        path: '/createDoctor',
-        element: <RegistrarDoctor/>
-      },
-      {
-        path: '/editDoctor/:codigo_doctor',
-        element: <EditDoctor/>
-      },
-      {
-        path: '/histories',
-        element: <Histories/>
-      },
-      {
-        path: '/horarios',
-        element: <Horarios/>
-      },
-      {
-        path: '/editHorario/:horario_id',
-        element: <EditHorarios/>
-      },
-      
-      {
-        path: '/createHorario',
-        element: <CreateHorarios/>
-      },
-      {
-        path: '/services',
-        element: <Servicios/>
-      },
-      {
-        path: '/createService',
-        element: <CreateService/>
-      },
-      {
-        path: '/editService/:codigo_servicio',
-        element: <EditService/>
-      },
-      {
-        path: '/citas',
-        element: <Citas/>
-      },
-      {
-        path: '/createCita',
-        element: <CreateCita/>
+        path: '/',
+        element: <LayoutAdmin />,
+        children: [
+          {
+            path: '/homeadmin',
+            element: <HomeAdmin />
+          },
+          {
+            path: '/signup',
+            element: <Signup />
+          },
+          {
+            path: '/patients',
+            element: <Pacientes />
+          },
+          {
+            path: '/createPatients',
+            element: <RegistrarPacientes />
+          },
+          {
+            path: '/watchPatient/:codigo_paciente',
+            element: <DetailsPatients />
+          },
+          {
+            path: '/editPatient/:codigo_paciente',
+            element: <EditPatient />
+          },
+          {
+            path: '/doctors',
+            element: <Doctors />
+          },
+          {
+            path: '/watchDoctor/:codigo_doctor',
+            element: <DetailsDoctor />
+          },
+          {
+            path: '/createDoctor',
+            element: <RegistrarDoctor />
+          },
+          {
+            path: '/editDoctor/:codigo_doctor',
+            element: <EditDoctor />
+          },
+          {
+            path: '/histories',
+            element: <Histories />
+          },
+          {
+            path: '/horarios',
+            element: <Horarios />
+          },
+          {
+            path: '/editHorario/:horario_id',
+            element: <EditHorarios />
+          },
+          {
+            path: '/createHorario',
+            element: <CreateHorarios />
+          },
+          {
+            path: '/services',
+            element: <Servicios />
+          },
+          {
+            path: '/createService',
+            element: <CreateService />
+          },
+          {
+            path: '/editService/:codigo_servicio',
+            element: <EditService />
+          },
+          {
+            path: '/citas',
+            element: <Citas />
+          },
+          {
+            path: '/createCita',
+            element: <CreateCita />
+          },
+          {
+            path: '/citaDay',
+            element: <CitasByDay />
+          },
+          {
+            path: '/editCita/:codigo_cita',
+            element: <EditCita />
+          },
+          {
+            path: '/createHistory',
+            element: <CreateHistoria />
+          },
+          {
+            path: '/editHistory/:codigo_historia',
+            element: <EditHistoria />
+          },
+          {
+            path: '/transaction',
+            element: <Transactions />
+          },
+          {
+            path: '/createTrans',
+            element: <CreateTrans />
+          },
+          {
+            path: '/editTrans/:codigo_transaccion',
+            element: <EditTrans />
+          },
+          {
+            path: '/presupuesto',
+            element: <Presupuestos />
+          },
+          {
+            path: '/createPresu',
+            element: <CreatePresu />
+          },
+          {
+            path: '/editPre/:codigo_presupuesto',
+            element: <EditPresu />
+          },
+          {
+            path: '/watchPresu/:codigo_presupuesto',
+            element: <DetailsPresu />
+          }
+        ]
       }
-      ,
-      {
-        path: '/citaDay',
-        element: <CitasByDay/>
-      }
-      ,
-      {
-        path: '/editCita/:codigo_cita',
-        element: <EditCita/>
-      }
-      ,
-      {
-        path: '/createHistory',
-        element: <CreateHistoria/>
-      }
-      ,
-      {
-        path: '/editHistory/:codigo_historia',
-        element: <EditHistoria/>
-      },
-      {
-        path: '/transaction',
-        element: <Transactions/>
-      },
-      {
-        path: '/createTrans',
-        element: <CreateTrans/>
-      },
-      {
-        path: '/editTrans/:codigo_transaccion',
-        element: <EditTrans/>
-      }
-      ,
-      {
-        path: '/presupuesto',
-        element: <Presupuestos/>
-      },
-      {
-        path: '/createPresu',
-        element: <CreatePresu/>
-      },
-      {
-        path: '/editPre/:codigo_presupuesto',
-        element: <EditPresu/>
-      },
-      {
-        path: '/watchPresu/:codigo_presupuesto',
-        element: <DetailsPresu/>
-      }
-
     ]
   }
-])
+]);
 
 function App() {
-
-
   return (
-      <>
-    <RouterProvider router={router} />
-    <ToastContainer />
-    </>
-
-  
-  )
+    <Provider store={store}>
+      <RouterProvider router={router} />
+      <ToastContainer />
+    </Provider>
+  );
 }
 
-export default App
+export default App;

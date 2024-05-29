@@ -29,17 +29,7 @@ const MainLayout = () => {
        
         
         </div>
-        <Button
-          onClick={()=> setMenu((prev)=>!prev)}
-            variant="dark"
-            className="sm:hidden   -translate-x-20  flex right-32 top-2  text-white  font-medium text-lg flex-col gap-4 bg-teal-700"
-          >
-            {   
-             menu? <TiDelete /> : <CiMenuKebab />
-            }
-           
-          </Button>
-          
+    
         
       </header>
    

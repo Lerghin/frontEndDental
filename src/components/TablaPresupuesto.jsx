@@ -37,7 +37,7 @@ useEffect(() => {
   const handleDelete = async (codigo_presupuesto) => {
     if (window.confirm("¿Seguro que quieres borrar el presupuesto?")) {
       try {
-        await API.delete(`/presu/borrar/${codigo_presupuesto}`);
+        await API.delete(`admin/presu/borrar/${codigo_presupuesto}`);
        
         onDelete(codigo_presupuesto); 
      

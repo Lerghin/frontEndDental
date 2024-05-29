@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { FiPrinter } from "react-icons/fi";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { generarPDFPaciente } from './generarPDFPAciente';
+import { API } from '../../utils/axios';
 
 
 const DetailsPatients = () => {
@@ -22,11 +23,11 @@ const DetailsPatients = () => {
         const fetchData = async () => {
             try {
                 const [patientResponse, citasResponse, historyResponse, debeResponse, transResp] = await Promise.all([
-                    axios.get(`http://localhost:8080/pacientesdr/traer/${params.codigo_paciente}`),
-                    axios.get(`http://localhost:8080/pacientescita/traer/${params.codigo_paciente}`),
-                    axios.get(`http://localhost:8080/pacienteshistory/traer/${params.codigo_paciente}`),
-                    axios.get(`http://localhost:8080/total-debe/${params.codigo_paciente}`),
-                    axios.get(`http://localhost:8080/trans/getbyPatient/${params.codigo_paciente}`)
+                    API.get(`http://localhost:8080/pacientesdr/traer/${params.codigo_paciente}`),
+                    API.get(`http://localhost:8080/pacientescita/traer/${params.codigo_paciente}`),
+                    API.get(`http://localhost:8080/pacienteshistory/traer/${params.codigo_paciente}`),
+                    API.get(`http://localhost:8080/total-debe/${params.codigo_paciente}`),
+                    API.get(`http://localhost:8080/trans/getbyPatient/${params.codigo_paciente}`)
                 ]);
 
                 setPatient(patientResponse.data);
@@ -137,8 +138,8 @@ const DetailsPatients = () => {
                                     <tr key={tran.codigo_transaccion}>
                                         <td>{tran.codigo_transaccion}</td>
                                         <td>{tran.fecha}</td>
-                                        <td>{tran.deuda}</td>
-                                        <td>{tran.ingreso}</td>
+                                        <td>{tran.deuda}$</td>
+                                        <td>{tran.ingreso}$</td>
                                         <td>{tran.formaPago}</td>
                                         <td>{tran.observaciones}</td>
                                     </tr>

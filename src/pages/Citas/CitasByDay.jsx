@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import SideBarCitas from "../../components/SideBarCitas";
-import axios from "axios";
+
 import Table from "react-bootstrap/Table";
 import Button from 'react-bootstrap/Button';
 import { FiPrinter } from "react-icons/fi";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { API } from "../../utils/axios";
+
 const CitasByDay = () => {
   const [citas, setCitas] = useState([]);
   const [message, setMessage] = useState('');
  const navigate=useNavigate();
   useEffect(() => {
-    axios.get('http://localhost:8080/citas/hoy')
+    API.get('http://localhost:8080/citas/hoy')
       .then(response => {
         setCitas(response.data.citas);
         setMessage(response.data.message);

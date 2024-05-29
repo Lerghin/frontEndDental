@@ -21,7 +21,7 @@ const TablaServicios = ({ data, onDelete }) => {
   const handleDelete = async (codigo_servicio) => {
     if (window.confirm("¿Seguro que quieres borrar el servicio?")) {
       try {
-        await API.delete(`/servicios/borrar/${codigo_servicio}`);
+        await API.delete(`/admin/servicios/borrar/${codigo_servicio}`);
        
         onDelete(codigo_servicio); 
      

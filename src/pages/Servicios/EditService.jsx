@@ -1,11 +1,12 @@
 
-import axios from 'axios';
+
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidSave } from "react-icons/bi";
 import { toast } from "react-toastify"
+import { API } from '../../utils/axios';
 
 const EditService = () => {
     const [servicio, setServicio] = useState(null);
@@ -15,7 +16,7 @@ const EditService = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/servicios/traer/${params.codigo_servicio}`);
+                const response = await API.get(`http://localhost:8080/servicios/traer/${params.codigo_servicio}`);
                 
                 setServicio(response.data);
                 console.log(response.data);
@@ -41,7 +42,7 @@ const EditService = () => {
         event.preventDefault();
         console.log("Datos a enviar:", servicio); 
         try {
-      const{data}=   await axios.put(`http://localhost:8080/servicios/editar/${params.codigo_servicio}`, servicio);
+      const{data}=   await API.put(`http://localhost:8080/servicios/editar/${params.codigo_servicio}`, servicio);
                 
             toast.success(data.message)
       

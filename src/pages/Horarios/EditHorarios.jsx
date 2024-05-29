@@ -6,6 +6,8 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidSave } from "react-icons/bi";
 import { toast } from "react-toastify"
+import { API } from '../../utils/axios';
+
 const EditHorario = () => {
     const [horario, setHorario] = useState(null);
     const[doctor, setDoctor]=useState([]);
@@ -14,8 +16,8 @@ const EditHorario = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/horarios/traer/${params.horario_id}`);
-                const responseDoctor=await axios.get('http://localhost:8080/doctor/traer');
+                const response = await API.get(`http://localhost:8080/horarios/traer/${params.horario_id}`);
+                const responseDoctor=await API.get('http://localhost:8080/doctor/traer');
                 setHorario(response.data);
                 console.log(response.data);
                 setDoctor(responseDoctor.data);

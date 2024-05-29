@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 import { Form, Button, Table, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import SideBarPresupuesto from "../../components/SideBarPresupuesto";
+import { generarPDFPresupuesto } from "./generarPDFPRESU";
+import { toast } from "react-toastify";
+import { API } from "../../utils/axios";
 
 const CreatePresu = () => {
   const [presupuesto, setPresupuesto] = useState({
@@ -41,7 +44,9 @@ const CreatePresu = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/presu/crear", presupuesto);
+      const response = await API.post("http://localhost:8080/presu/crear", presupuesto);
+      toast.success("Presupuesto registrado con éxito");
+      generarPDFPresupuesto(response.data, totalMonto); // Llamada para generar el PDF
       navigate('/presupuesto');
       console.log("Presupuesto creado:", response.data);
       setPresupuesto({ nombre: "", apellido: "", cedula: "", detalles: [{ descripcion: "", monto: "" }] });
@@ -51,7 +56,6 @@ const CreatePresu = () => {
   };
 
   useEffect(() => {
-   
     const total = presupuesto.detalles.reduce((sum, detalle) => sum + parseFloat(detalle.monto || 0), 0);
     setTotalMonto(total);
   }, [presupuesto.detalles]);

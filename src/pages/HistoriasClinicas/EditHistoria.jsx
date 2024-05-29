@@ -4,10 +4,11 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidSave } from "react-icons/bi";
-import axios from "axios";
+
 import "./../css/RegistroPaciente.css";
 import "react-datepicker/dist/react-datepicker.css";
 import SideBarHistorias from "../../components/SideBarHistorias";
+import { API } from "../../utils/axios";
 
 
 const EditHistoria = () => {
@@ -27,7 +28,7 @@ const EditHistoria = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/historias/traer/${codigo_historia}`);
+        const response = await API.get(`http://localhost:8080/historias/traer/${codigo_historia}`);
         setHistorias(response.data);
       
         console.log(response.data.paciente)
@@ -55,7 +56,7 @@ const EditHistoria = () => {
     console.log(historias)
     try {
     
-      await axios.put("http://localhost:8080/historias/editar", historias);
+      await API.put("http://localhost:8080/historias/editar", historias);
       toast.success("Historia editada con éxito");
       console.log("data:",historias)
       navigate("/histories");

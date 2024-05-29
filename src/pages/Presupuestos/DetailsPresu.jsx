@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { FiPrinter } from "react-icons/fi";
 import { RiArrowGoBackFill } from "react-icons/ri";
 
 import { generarPDFPresupuesto } from './generarPDFPRESU';
+import { API } from '../../utils/axios';
 
 const DetailsPatients = () => {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const DetailsPatients = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const presuResponse = await axios.get(`http://localhost:8080/presu/traer/${params.codigo_presupuesto}`);
+                const presuResponse = await API.get(`http://localhost:8080/presu/traer/${params.codigo_presupuesto}`);
                 setPresu(presuResponse.data);
             } catch (error) {
                 setError(error.message);

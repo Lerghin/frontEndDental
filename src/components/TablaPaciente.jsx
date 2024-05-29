@@ -27,7 +27,7 @@ const TablaPaciente = ({ data, onDelete }) => {
   const handleDelete = async (codigo_paciente) => {
     if (window.confirm("¿Seguro que quieres borrar el paciente?")) {
       try {
-        await API.delete(`/pacientes/borrar/${codigo_paciente}`);
+        await API.delete(`/admin/pacientes/borrar/${codigo_paciente}`);
         onDelete(codigo_paciente); 
         navigate('/patients')
        

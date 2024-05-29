@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 import Table from "react-bootstrap/Table";
 import "../css/Home.css";
 import SideBarCitas from "../../components/SideBarCitas.jsx";
 import TablaCitas from "../../components/TablaCitas.jsx";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import { API } from "../../utils/axios.js";
 
 const Citas = () => {
   const [citas, setCitas] = useState([]);
@@ -14,7 +15,7 @@ const Citas = () => {
   const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
-    axios
+     API
       .get("http://localhost:8080/citas/traer")
       .then((response) => {
         const fetchedCitas = response.data;

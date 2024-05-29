@@ -7,13 +7,11 @@ export const LINKSHOME= [
        
       ]
 
-export const LINKSLOG=[
-    {id:0, title:'Cerrar Sesión', href:'signout'},
-    {id:0, title:'Editar Perfil', href:'editadmin'},
-   
-
-]
-
+ export const LINKSLOG = [
+        { id: 0, title: 'Cerrar Sesión', href: 'logout' },
+        { id: 1, title: 'Editar Perfil', href: 'editadmin' },
+      ];
+      
 
 export const barPacientes=[
   {id:0, title:'Cerrar Sesión', href:'signout'},

@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 
-import axios from "axios";
+
 
 import Table from "react-bootstrap/Table"; // Asegúrate de importar la tabla
 import "../css/Home.css";
 import TablaDoctores from "../../components/TablaDoctores.jsx";
 import SideBarDoctores from "../../components/SidebarDoctores.jsx";
+import { API } from "../../utils/axios.js";
 
 
 const Doctors = () => {
@@ -14,7 +15,7 @@ const Doctors = () => {
   const [results, setResults] = useState([]);
   const [sortedDoctors, setSortedDoctors] = useState([]);
   useEffect(() => {
-    axios
+    API
       .get("http://localhost:8080/doctor/traer")
       .then((response) => {
         const fetchedDoctors = response.data;
@@ -28,7 +29,7 @@ const Doctors = () => {
   const searcher = (e) => {
     const searchTerm= e.target.value.toLowerCase();
     setSearch(searchTerm);
-    console.log(searchTerm);
+  
     const filteredPatients= doctors.filter(pat=> 
     pat.nombre.toLowerCase().includes(searchTerm)||
     pat.apellido.toLowerCase().includes(searchTerm)||

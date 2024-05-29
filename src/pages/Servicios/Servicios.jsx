@@ -1,8 +1,9 @@
-import axios from 'axios';
+
 import  { useEffect, useState } from 'react'
 import Table from "react-bootstrap/Table"; 
 import TablaServicios from '../../components/TablaServicios.jsx';
 import SideBarServicios from '.././../components/SideBarServicio.jsx';
+import { API } from '../../utils/axios.js';
 
 const Servicios = () => {
 const [servicios, setServicios]=  useState([]);
@@ -10,7 +11,7 @@ const [search, setSearch]=useState("");
 const [results, setResults]= useState([]);
 const [sortedDoctors, setSortedDoctors] = useState([]);
 useEffect(() => {
-  axios
+  API
     .get("http://localhost:8080/servicios/traer")
     .then((response) => {
       const fetchedServicios = response.data;

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { FiPrinter } from "react-icons/fi";
 import { RiArrowGoBackFill } from "react-icons/ri";
+import { API } from "../../utils/axios";
 const DetailsDoctor = () => {
   const navigate = useNavigate();
   const params = useParams();
@@ -16,7 +17,7 @@ const DetailsDoctor = () => {
     const fetchData = async () => {
       try {
         const [doctorResponse] = await Promise.all([
-          axios.get(
+          API.get(
             `http://localhost:8080/doctor/traer/${params.codigo_doctor}`
           ),
         ]);

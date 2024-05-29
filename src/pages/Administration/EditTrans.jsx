@@ -10,6 +10,7 @@ import "./../css/RegistroPaciente.css";
 import "react-datepicker/dist/react-datepicker.css";
 import SideBarCitas from "../../components/SideBarCitas";
 import moment from 'moment';
+import { API } from "../../utils/axios";
 
 const EditTrans = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const EditTrans = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/trans/traer/${codigo_transaccion}`);
+        const response = await API.get(`http://localhost:8080/trans/traer/${codigo_transaccion}`);
         setTrans(response.data);
         setCedula(response.data.paciente.cedula);
 

@@ -23,7 +23,7 @@ const TablaCitas = ({ data, onDelete }) => {
   const handleDelete = async (codigo_cita) => {
     if (window.confirm("¿Segur@ que quieres borrar la Cita?")) {
       try {
-        await API.delete(`/citas/borrar/${codigo_cita}`);
+        await API.delete(`admin/citas/borrar/${codigo_cita}`);
 
         onDelete(codigo_cita);
 

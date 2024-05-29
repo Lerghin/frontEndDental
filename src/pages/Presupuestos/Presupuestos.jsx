@@ -1,10 +1,11 @@
 
-import axios from 'axios';
+
 import  { useEffect, useState } from 'react'
 import Table from "react-bootstrap/Table"; 
 
 import TablaPresupuesto from '../../components/TablaPresupuesto.jsx';
 import SideBarPresupuesto from '../../components/SideBarPresupuesto.jsx';
+import { API } from '../../utils/axios.js';
 
 const  Presupuestos = () => {
 const [presu, setPresu]=  useState([]);
@@ -12,7 +13,7 @@ const [search, setSearch]=useState("");
 const [results, setResults]= useState([]);
 
 useEffect(() => {
-  axios
+  API
     .get("http://localhost:8080/presu/traer")
     .then((response) => {
       const fetchedPresu = response.data;

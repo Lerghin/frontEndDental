@@ -19,7 +19,7 @@ const TablaHorario = ({ data, onDelete }) => {
   const handleDelete = async (horario_id) => {
     if (window.confirm("¿Seguro que quieres borrar el horario?")) {
       try {
-        await API.delete(`/horarios/borrar/${horario_id}`);
+        await API.delete(`/admin/horarios/borrar/${horario_id}`);
         console.log(horario_id)
         onDelete(horario_id); 
      

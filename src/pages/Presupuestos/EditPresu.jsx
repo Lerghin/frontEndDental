@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 import { Form, Button, Table, Container, Row, Col } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import SideBarPresupuesto from "../../components/SideBarPresupuesto";
+import { API } from "../../utils/axios";
 
 const EditPresu = () => {
   const { codigo_presupuesto } = useParams();
@@ -18,7 +19,7 @@ const EditPresu = () => {
   useEffect(() => {
     const fetchPresupuesto = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/presu/traer/${codigo_presupuesto}`);
+        const response = await API.get(`http://localhost:8080/presu/traer/${codigo_presupuesto}`);
         setPresupuesto(response.data);
       } catch (error) {
         console.error("Error al cargar el presupuesto:", error);
@@ -53,7 +54,7 @@ const EditPresu = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:8080/presu/editar/${codigo_presupuesto}`, presupuesto);
+      const response = await API.put(`http://localhost:8080/presu/editar/${codigo_presupuesto}`, presupuesto);
       navigate('/presupuesto');
       console.log("Presupuesto actualizado:", response.data);
     } catch (error) {

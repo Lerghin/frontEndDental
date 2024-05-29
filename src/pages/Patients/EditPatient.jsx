@@ -1,11 +1,13 @@
 
-import axios from 'axios';
+
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidSave } from "react-icons/bi";
 import { toast } from "react-toastify"
+import { API } from '../../utils/axios';
+
 const EditPatientForm = () => {
     const [paciente, setPaciente] = useState(null);
     const[doctor, setDoctor]=useState(null);
@@ -14,8 +16,8 @@ const EditPatientForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/pacientesdr/traer/${params.codigo_paciente}`);
-                const responseDoctor=await axios.get('http://localhost:8080/doctor/traer');
+                const response = await API.get(`http://localhost:8080/pacientesdr/traer/${params.codigo_paciente}`);
+                const responseDoctor=await API.get('http://localhost:8080/doctor/traer');
                 setPaciente(response.data);
                 setDoctor(responseDoctor.data);
                
@@ -39,9 +41,11 @@ const EditPatientForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        
         try {
-      const{data}=   await axios.put(`http://localhost:8080/pacientes/editar/${params.codigo_paciente}`, paciente);
-                
+            console.log(paciente)
+      const{data}=   await API.put(`admin/pacientes/editar/${params.codigo_paciente}`, paciente);
+               
             toast.success(data.message)
       
             alert("Paciente Modificado con éxito")

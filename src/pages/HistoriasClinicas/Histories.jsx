@@ -1,12 +1,13 @@
 
 import { useState, useEffect } from "react";
 
-import axios from "axios";
+
 
 import Table from "react-bootstrap/Table"; // Asegúrate de importar la tabla
 import "../css/Home.css";
 import TablaHistoria from "../../components/TablaHistoria";
 import SideBarHistorias from "../../components/SideBarHistorias";
+import { API } from "../../utils/axios";
 
 
 const Histories = () => {
@@ -14,7 +15,7 @@ const Histories = () => {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
   useEffect(() => {
-    axios
+    API
       .get("http://localhost:8080/historias/traer")
       .then((response) => {
         setHistories(response.data);

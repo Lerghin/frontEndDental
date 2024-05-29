@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
-import axios from "axios";
+
 import { API } from "../../utils/axios";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidSave } from "react-icons/bi";
@@ -24,7 +24,7 @@ const CreateHistoria = () => {
   useEffect(() => {
     const fetchDoctores = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/doctor/traer");
+        const response = await API.get("http://localhost:8080/doctor/traer");
         setDoctores(response.data);
       
        
@@ -43,7 +43,7 @@ const CreateHistoria = () => {
 
     if (cedulaValue.length >= 8) {
       try {
-        const response = await axios.get(`http://localhost:8080/pacientes/traerbycedula/${cedulaValue}`);
+        const response = await API.get(`http://localhost:8080/pacientes/traerbycedula/${cedulaValue}`);
         if (response.data) {
           setPaciente({
             nombre: response.data.nombre,

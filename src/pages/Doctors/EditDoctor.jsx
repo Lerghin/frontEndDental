@@ -1,10 +1,11 @@
-import axios from "axios";
+
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidSave } from "react-icons/bi";
 import { toast } from "react-toastify";
+import { API } from "../../utils/axios";
 const EditDoctor = () => {
   const [doctor, setDoctor] = useState(null);
   const [horarios, setHorarios] = useState(null);
@@ -13,10 +14,10 @@ const EditDoctor = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
+        const response = await API.get(
           `http://localhost:8080/doctor/traer/${params.codigo_doctor}`
         );
-        const responseHorarios = await axios.get(
+        const responseHorarios = await API.get(
           "http://localhost:8080/onlyhorarios/traer"
         );
         setDoctor(response.data);
@@ -66,7 +67,7 @@ const EditDoctor = () => {
     event.preventDefault();
     try {
        
-      const { data } = await axios.put(
+      const { data } = await API.put(
         `http://localhost:8080/doctor/editar/${params.codigo_doctor}`,
         doctor
       );
