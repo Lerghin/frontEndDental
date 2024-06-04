@@ -1,5 +1,5 @@
 
-import axios from 'axios';
+
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
@@ -46,7 +46,7 @@ const EditHorario = () => {
         event.preventDefault();
         
         try {
-      const{data}=   await axios.put(`http://localhost:8080/horarios/editar/${params.horario_id}`, horario);
+      const{data}=   await API.put(`http://localhost:8080/admin/horarios/editar/${params.horario_id}`, horario);
                 
             toast.success(data.message)
       

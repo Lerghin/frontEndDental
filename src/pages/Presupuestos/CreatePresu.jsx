@@ -143,7 +143,7 @@ const CreatePresu = () => {
               Agregar Detalle
             </Button>
           </div>
-          <h3 className="text-center">Total: {totalMonto.toFixed(2)}</h3>
+          <h3 className="text-center">Total: {totalMonto.toFixed(2)}$ US.dollar</h3>
           <br /><br />
           <div className="text-center">
             <Button variant="success" type="submit">

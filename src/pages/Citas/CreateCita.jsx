@@ -6,7 +6,7 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidSave } from "react-icons/bi";
 import { API } from "../../utils/axios";
 import DatePicker from "react-datepicker";
-import axios from "axios";
+
 import "./../css/RegistroPaciente.css";
 import "react-datepicker/dist/react-datepicker.css";
 import SideBarCitas from "../../components/SideBarCitas";
@@ -83,7 +83,7 @@ const CreateCita = () => {
   };
 
   useEffect(() => {
-    axios
+    API
       .get("http://localhost:8080/servicios/traer")
       .then((response) => {
         const fetchedServicios = response.data;
@@ -92,7 +92,7 @@ const CreateCita = () => {
       .catch((error) => console.error("Error fetching doctors:", error));
   }, []);
   useEffect(() => {
-    axios
+    API
       .get("http://localhost:8080/doctor/traer")
       .then((response) => {
         const fetchedDoctors = response.data;

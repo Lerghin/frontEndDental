@@ -4,6 +4,7 @@ import { API } from '../utils/axios'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import '../pages/css/Signup.css';
+import { LS } from "../utils/LS";
 const Signup = () => {
 
     const [userData, setUserData]= useState({
@@ -19,10 +20,17 @@ const Signup = () => {
     }
     const handleSubmit= async()=>{
         try{
-            const {data}= await API.post('register/admin', userData)
-            console.log(data)
-            toast.success(data.message)
-            navigate('/home')
+            const res= await API.post('register/admin', userData)
+            console.log(res)
+            toast.success(res.message)
+            const { token, role } = res.data;
+        LS.set('token', token);
+        LS.set('role', role);
+        if (role === 'ADMIN') {
+          navigate('/homeadmin');
+        } else {
+          navigate('/homeuser');
+        }
         }catch (error){
             const {message}=error.response.data
             console.log(error)

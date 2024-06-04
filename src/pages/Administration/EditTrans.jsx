@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidSave } from "react-icons/bi";
 import DatePicker from "react-datepicker";
-import axios from "axios";
+
 import "./../css/RegistroPaciente.css";
 import "react-datepicker/dist/react-datepicker.css";
 import SideBarCitas from "../../components/SideBarCitas";
@@ -69,9 +69,9 @@ const EditTrans = () => {
         paciente: { codigoPaciente: trans.paciente.codigoPaciente }
      
       };
-      await axios.put("http://localhost:8080/trans/edit", transData);
-      toast.success("Cita editada con éxito");
-      console.log("citaData:",transData)
+      await API.put("http://localhost:8080/admin/trans/edit", transData);
+      toast.success("Pago editado con éxito");
+      
       navigate("/transaction");
     } catch (error) {
       console.error('Error editing cita:', error);

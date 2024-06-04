@@ -4,6 +4,7 @@ import { Form, Button, Table, Container, Row, Col } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import SideBarPresupuesto from "../../components/SideBarPresupuesto";
 import { API } from "../../utils/axios";
+import { toast } from "react-toastify";
 
 const EditPresu = () => {
   const { codigo_presupuesto } = useParams();
@@ -54,7 +55,8 @@ const EditPresu = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await API.put(`http://localhost:8080/presu/editar/${codigo_presupuesto}`, presupuesto);
+      const response = await API.put(`http://localhost:8080/admin/presu/editar/${codigo_presupuesto}`, presupuesto);
+      toast.success("Presupuesto editado con éxito");
       navigate('/presupuesto');
       console.log("Presupuesto actualizado:", response.data);
     } catch (error) {
@@ -150,7 +152,7 @@ const EditPresu = () => {
               Agregar Detalle
             </Button>
           </div>
-          <h3 className="text-center">Total: {totalMonto.toFixed(2)}</h3>
+          <h3 className="text-center">Total: {totalMonto.toFixed(2)}$ US.Dollar</h3>
           <br /><br />
           <div className="text-center">
             <Button variant="success" type="submit">

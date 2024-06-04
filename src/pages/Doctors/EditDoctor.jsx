@@ -24,7 +24,7 @@ const EditDoctor = () => {
         setHorarios(responseHorarios.data);
   
 
-        console.log(params.codigo_doctor);
+      
       } catch (error) {
         console.error("Error fetching doctor data:", error);
       }
@@ -36,7 +36,7 @@ const EditDoctor = () => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setDoctor({ ...doctor, [name]: value });
-    console.log(doctor);
+   
   };
 
 
@@ -68,7 +68,7 @@ const EditDoctor = () => {
     try {
        
       const { data } = await API.put(
-        `http://localhost:8080/doctor/editar/${params.codigo_doctor}`,
+        `http://localhost:8080/admin/doctor/editar/${params.codigo_doctor}`,
         doctor
       );
       if (data) {

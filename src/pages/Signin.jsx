@@ -36,12 +36,17 @@ const Signin = () => {
 
       if (res.status === 200) {
         toast.success('You are logged in successfully');
-        const { token } = res.data;
+        const { token, role } = res.data;
         LS.set('token', token);
-        navigate('/homeadmin');
+        LS.set('role', role);
+        if (role === 'ADMIN') {
+          navigate('/homeadmin');
+        } else {
+          navigate('/homeuser');
+        }
       }
     } catch (error) {
-      toast.error('Login failed');
+      toast.error(error.message);
       console.error(error);
     }
   };

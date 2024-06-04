@@ -42,11 +42,11 @@ const EditService = () => {
         event.preventDefault();
         console.log("Datos a enviar:", servicio); 
         try {
-      const{data}=   await API.put(`http://localhost:8080/servicios/editar/${params.codigo_servicio}`, servicio);
+      const{data}=   await API.put(`http://localhost:8080/admin/servicios/editar/${params.codigo_servicio}`, servicio);
                 
             toast.success(data.message)
       
-            alert("Horario Modificado con éxito")
+            alert("Servicio Modificado con éxito")
             
             navigate('/services');
             console.log('horarios actualizado correctamente');

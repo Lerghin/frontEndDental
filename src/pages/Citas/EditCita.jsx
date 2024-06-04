@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BiSolidSave } from "react-icons/bi";
 import DatePicker from "react-datepicker";
-import axios from "axios";
+
 import "./../css/RegistroPaciente.css";
 import "react-datepicker/dist/react-datepicker.css";
 import SideBarCitas from "../../components/SideBarCitas";
@@ -35,14 +35,14 @@ const EditCita = () => {
         setCitas(response.data);
         setCedula(response.data.unPaciente.cedula);
 
-        const responseDoctor = await axios.get("http://localhost:8080/doctor/traer");
+        const responseDoctor = await API.get("http://localhost:8080/doctor/traer");
         setDoctors(responseDoctor.data);
 
-        const responseServicios = await axios.get("http://localhost:8080/servicios/traer");
+        const responseServicios = await API.get("http://localhost:8080/servicios/traer");
         setServicios(responseServicios.data);
       } catch (error) {
         console.error('Error fetching data:', error);
-        toast.error("Error al cargar los datos de la cita.");
+        //toast.error("Error al cargar los datos de la cita.");
       }
     };
 
@@ -80,7 +80,7 @@ const handleDoctorChange = (event) => {
         unDoctor: { codigo_doctor: citas.unDoctor.codigo_doctor },
         servicio: { codigo_servicio: citas.servicio.codigo_servicio },
       };
-      await axios.put("http://localhost:8080/citas/editar", citaData);
+      await API.put("http://localhost:8080/admin/citas/editar", citaData);
       toast.success("Cita editada con éxito");
       console.log("citaData:",citaData)
       navigate("/citas");
@@ -95,7 +95,7 @@ const handleDoctorChange = (event) => {
     setCedula(cedulaValue);
 
     if (cedulaValue.length >= 8) {
-      axios
+      API
         .get(`http://localhost:8080/pacientes/traerbycedula/${cedulaValue}`)
         .then((response) => {
           if (response.data) {
@@ -169,6 +169,7 @@ const handleDoctorChange = (event) => {
                   value={cedula}
                   onChange={handleCedulaChange}
                   required
+                  readOnly
                 />
               </Form.Group>
             </Row>
@@ -273,7 +274,7 @@ const handleDoctorChange = (event) => {
               <Button variant="success" type="submit">
                 <BiSolidSave />
               </Button>
-              <Button onClick={() => navigate("/services")} variant="secondary">
+              <Button onClick={() => navigate("/citas")} variant="secondary">
                 <RiArrowGoBackFill />
               </Button>
             </div>

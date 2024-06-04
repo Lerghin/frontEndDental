@@ -4,13 +4,13 @@
     align-items: center;
     
     height: 100vh;
-    
+    background-image: url("./../../../public/assets/—Pngtree—dental\ equipment_2379817.png");
 
    background-attachment:fixed ;
 
-background-size: cover;
+
    
-    background-color: #f3f5f5; 
+
   }
   
   .signup-card {
