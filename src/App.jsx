@@ -39,6 +39,9 @@ import EditPresu from "./pages/Presupuestos/EditPresu.jsx";
 import DetailsPresu from "./pages/Presupuestos/DetailsPresu.jsx";
 import { Provider, useSelector } from "react-redux";
 import store from '../src/pages/Store/store.js';
+import CreateUsuario from "./pages/CreateUsuario.jsx";
+import Users from "./pages/Users.jsx";
+
 
 const ProtectedRoute = () => {
   const status = useSelector(state => state.clinica.status);
@@ -56,11 +59,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Signin />
-      },
-      {
-        path: '/signup',
-        element: <Signup />
-      },
+      }
     ]
   },
   {
@@ -71,6 +70,10 @@ const router = createBrowserRouter([
         path: '/',
         element: <LayoutAdmin />,
         children: [
+          {
+            path: '/signup',
+            element: <Signup />
+          },
           {
             path: '/homeadmin',
             element: <HomeAdmin />
@@ -190,6 +193,14 @@ const router = createBrowserRouter([
           {
             path: '/watchPresu/:codigo_presupuesto',
             element: <DetailsPresu />
+          },
+          {
+            path: '/createUser',
+            element: <CreateUsuario />
+          },
+          {
+            path: '/users',
+            element: <Users />
           }
         ]
       }

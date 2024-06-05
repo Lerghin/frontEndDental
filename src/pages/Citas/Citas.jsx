@@ -7,12 +7,24 @@ import TablaCitas from "../../components/TablaCitas.jsx";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { API } from "../../utils/axios.js";
+import { LS } from "../../utils/LS.js";
 
 const Citas = () => {
   const [citas, setCitas] = useState([]);
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [userRole, setUserRole] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const role = LS.getText("role");
+    if (role) {
+      setUserRole(role.trim()); // Eliminar espacios extra si los hay
+    }
+    setLoading(false); // Marcar la carga como completada
+  }, []);
+
+  
 
   useEffect(() => {
      API
@@ -122,7 +134,7 @@ const Citas = () => {
                   <th>Motivo</th>
                   <th>Observaciones</th>
                   <th>Estado</th>
-                  <th></th>
+                 {userRole==='USER'? null:( <th></th>)} 
                 </tr>
               </thead>
               <tbody>

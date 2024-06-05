@@ -5,6 +5,7 @@ import TablaPaciente from "../../components/TablaPaciente";
 import Table from "react-bootstrap/Table";
 import "../css/Home.css";
 import { API } from "../../utils/axios";
+import { LS } from "../../utils/LS";
 
 const Pacientes = () => {
   const [pacientes, setPacientes] = useState([]);
@@ -13,6 +14,15 @@ const Pacientes = () => {
   const [sortedPacientes, setSortedPacientes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    const role = LS.getText("role");
+    if (role) {
+      setUserRole(role.trim()); // Eliminar espacios extra si los hay
+    }
+
+  }, []);
 
   useEffect(() => {
     const fetchPacientes = async () => {
@@ -94,7 +104,7 @@ const Pacientes = () => {
                   <th>Dirección</th>
                   <th>Teléfono</th>
                   <th>Doctor Asignado</th>
-                  <th></th>
+                 {userRole==='USER'? null:( <th></th>)}
                 </tr>
               </thead>
               <tbody>

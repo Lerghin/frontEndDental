@@ -7,6 +7,7 @@ import "../css/Home.css";
 import TablaDoctores from "../../components/TablaDoctores.jsx";
 import SideBarDoctores from "../../components/SidebarDoctores.jsx";
 import { API } from "../../utils/axios.js";
+import { LS } from "../../utils/LS.js";
 
 
 const Doctors = () => {
@@ -14,6 +15,18 @@ const Doctors = () => {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
   const [sortedDoctors, setSortedDoctors] = useState([]);
+
+  const [userRole, setUserRole] = useState(null);
+  
+  useEffect(() => {
+    const role = LS.getText("role");
+    if (role) {
+      setUserRole(role.trim()); 
+    }
+   console.log("error")
+  }, []);
+
+
   useEffect(() => {
     API
       .get("http://localhost:8080/doctor/traer")
@@ -69,7 +82,7 @@ const Doctors = () => {
               <th>Dirección</th>
               <th>Teléfono</th>
             
-              <th></th>
+              {userRole === 'USER' ? null : ( <th></th>)}
             
               
             

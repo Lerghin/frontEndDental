@@ -3,7 +3,8 @@ import "../pages/css/Home.css";
 import { FaUserEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { API } from "../utils/axios";
-
+import { useEffect, useState } from "react";
+import { LS } from "../utils/LS";
 
 const TablaDoctores = ({ data, onDelete }) => {
   const {
@@ -20,6 +21,15 @@ const TablaDoctores = ({ data, onDelete }) => {
   } = data;
   
 
+  const [userRole, setUserRole] = useState(null);
+  
+  useEffect(() => {
+    const role = LS.getText("role");
+    if (role) {
+      setUserRole(role.trim()); 
+    }
+   console.log("error")
+  }, []);
   
   const navigate = useNavigate();
 
@@ -53,12 +63,12 @@ const TablaDoctores = ({ data, onDelete }) => {
      
     
       
-      <td  >
+    { userRole==='USER' ?null: (<td  >
 
       <FaUserEdit className="m-2 my-2 h-5" onClick={() => navigate(`/editDoctor/${codigo_doctor}`)}  /> 
         <MdDeleteForever className="m-2 "  onClick={()=>handleDelete(codigo_doctor) }/>
   
-      </td>
+      </td>)}
     </tr>
   );
 };

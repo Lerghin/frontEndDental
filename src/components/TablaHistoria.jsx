@@ -3,6 +3,8 @@ import "../pages/css/Home.css";
 import { FaUserEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { API } from "../utils/axios";
+import { useEffect, useState } from "react";
+import { LS } from "../utils/LS";
 
 
 const TablaHistoria = ({ data, onDelete }) => {
@@ -15,7 +17,15 @@ const TablaHistoria = ({ data, onDelete }) => {
    paciente,
   } = data;
   
+  const [userRole, setUserRole] = useState(null);
 
+  useEffect(() => {
+    const role = LS.getText("role");
+    if (role) {
+      setUserRole(role.trim()); // Eliminar espacios extra si los hay
+    }
+   
+  }, []);
   
   const navigate = useNavigate();
 
@@ -47,12 +57,12 @@ const TablaHistoria = ({ data, onDelete }) => {
      
     
       
-      <td  >
+    {userRole==='USER'? null :(<td  >
 
-      <FaUserEdit className="m-2 my-2 h-5" onClick={() => navigate(`/editHistory/${codigo_historia}`)}  /> 
-        <MdDeleteForever className="m-2 "  onClick={()=>handleDelete(codigo_historia) }/>
-  
-      </td>
+<FaUserEdit className="m-2 my-2 h-5" onClick={() => navigate(`/editHistory/${codigo_historia}`)}  /> 
+  <MdDeleteForever className="m-2 "  onClick={()=>handleDelete(codigo_historia) }/>
+
+</td>)}  
     </tr>
   );
 };

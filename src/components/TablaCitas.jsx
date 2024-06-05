@@ -4,6 +4,8 @@ import "../pages/css/Home.css";
 import { MdDeleteForever } from "react-icons/md";
 import { API } from "../utils/axios";
 import { FaUserEdit } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { LS } from "../utils/LS";
 
 const TablaCitas = ({ data, onDelete }) => {
   const {
@@ -33,6 +35,21 @@ const TablaCitas = ({ data, onDelete }) => {
       }
     }
   };
+  const [userRole, setUserRole] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const role = LS.getText("role");
+    if (role) {
+      setUserRole(role.trim()); // Eliminar espacios extra si los hay
+    }
+    setLoading(false); // Marcar la carga como completada
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // O un spinner de carga
+  }
+
 
   return (
     <tr>
@@ -53,7 +70,7 @@ const TablaCitas = ({ data, onDelete }) => {
       <td>{motivo}</td>
       <td>{observaciones}</td>
       <td>{estado}</td>
-      <td>
+     {userRole==='USER'? null: (<td>
         <FaUserEdit
           className="m-2 my-2 h-5"
           onClick={() => navigate(`/editCita/${codigo_cita}`)}
@@ -64,6 +81,7 @@ const TablaCitas = ({ data, onDelete }) => {
           onClick={() => handleDelete(codigo_cita)}
         />
       </td>
+      )}
     </tr>
   );
 };

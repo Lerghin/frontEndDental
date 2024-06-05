@@ -1,7 +1,5 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import { CiMenuKebab } from "react-icons/ci";
-import { TiDelete } from "react-icons/ti";
+
 import Nav from "../components/Nav";
 import { LINKSHOME, LINKSLOG } from "../utils/enums";
 import LogInDropdown from "../components/LogInDropdown";
@@ -42,16 +40,7 @@ const LayoutAdmin = () => {
          ) }
         
         </div>
-        <Button
-          onClick={()=> setMenu((prev)=>!prev)}
-            variant="dark"
-            className="sm:hidden   -translate-x-20  flex right-32 top-2  text-white  font-medium text-lg flex-col gap-4 bg-teal-700"
-          >
-            {   
-             menu? <TiDelete /> : <CiMenuKebab />
-            }
-           
-          </Button>
+        
           
       
       </header>

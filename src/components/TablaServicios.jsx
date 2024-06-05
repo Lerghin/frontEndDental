@@ -4,8 +4,19 @@ import "../pages/css/Home.css";
 import { MdDeleteForever } from "react-icons/md";
 import { API } from "../utils/axios";
 import { FaUserEdit } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { LS } from "../utils/LS";
 
 const TablaServicios = ({ data, onDelete }) => {
+  const [userRole, setUserRole] = useState(null);
+ 
+  useEffect(() => {
+    const role = LS.getText("role");
+    if (role) {
+      setUserRole(role.trim()); // Eliminar espacios extra si los hay
+    }
+   
+  }, []); 
   const {
    
    codigo_servicio,
@@ -40,13 +51,13 @@ const TablaServicios = ({ data, onDelete }) => {
     {nombre} 
     </td>
     <td>{descripcion}</td>
-   
-    <td  >
+    {userRole==='USER'? null:(  <td  >
     <FaUserEdit className="m-2 my-2 h-5" onClick={() => navigate(`/editService/${codigo_servicio}`)}  /> 
     
       <MdDeleteForever className="m-2 "  onClick={()=>handleDelete(codigo_servicio) }/>
 
-    </td>
+    </td>)}
+   
   </tr>
 
 

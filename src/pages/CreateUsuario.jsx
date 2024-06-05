@@ -5,13 +5,14 @@ import { useState } from 'react';
 import '../pages/css/Signup.css';
 
 
-const Signup = () => {
+const CrearUsuario = () => {
   const [userData, setUserData] = useState({
     username: '',
     firstName: '',
     lastName: '',
     cedula: '',
     password: '',
+    role:"USER"
   });
   const navigate = useNavigate();
 
@@ -21,10 +22,11 @@ const Signup = () => {
 
   const handleSubmit = async () => {
     try {
-      const res = await API.post('/auth/admin/register', userData);
-     
+      const res = await API.post('/auth/admin/register/user', userData);
+      console.log(res);
       toast.success(res.message);
-  
+      
+    
      
       navigate('/homeadmin');
     
@@ -137,4 +139,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default CrearUsuario;

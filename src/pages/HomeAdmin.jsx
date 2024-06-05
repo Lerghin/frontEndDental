@@ -3,8 +3,17 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card';
 import '../components/css/home.css'
 import { useNavigate } from "react-router-dom";
-
+import {useEffect, useState} from 'react'
+import {LS} from '../utils/LS'
 const Home = () => {
+  const [userRole, setUserRole] = useState(null);
+  useEffect(() => {
+    const role = LS.getText("role");
+    if (role) {
+      setUserRole(role.trim()); 
+    }
+   console.log("error")
+  }, []);
 
   const navigate= useNavigate()
   return (
@@ -101,6 +110,19 @@ const Home = () => {
             <Button onClick={() => navigate('/presupuesto')} variant="btn btn-secondary" >Gestionar</Button>
           </Card.Body>
         </Card>
+        { userRole==='USER'? null :(    <Card  className="cardIn" style={{ width: '18rem' }}>
+          <Card.Img className="img-card" variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgpnmY-O9iz09Jka-vGvK2Lv-U-pL3H18CfA&s" />
+          <Card.Body>
+            <Card.Title>Usuarios </Card.Title>
+            <Card.Text>
+              Gestión de Usuarios con acceso al sistema
+            </Card.Text>
+            <br></br>
+            <Button onClick={() => navigate('/users')} variant="btn btn-secondary" >Gestionar</Button>
+          </Card.Body>
+        </Card>    )   }
+     
+        
         
     
          </div>

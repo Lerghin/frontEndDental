@@ -6,18 +6,27 @@ import Table from "react-bootstrap/Table";
 import TablaPresupuesto from '../../components/TablaPresupuesto.jsx';
 import SideBarPresupuesto from '../../components/SideBarPresupuesto.jsx';
 import { API } from '../../utils/axios.js';
+import { LS } from '../../utils/LS.js';
 
 const  Presupuestos = () => {
 const [presu, setPresu]=  useState([]);
 const [search, setSearch]=useState("");
 const [results, setResults]= useState([]);
+const [userRole, setUserRole] = useState(null);
 
+useEffect(() => {
+  const role = LS.getText("role");
+  if (role) {
+    setUserRole(role.trim()); // Eliminar espacios extra si los hay
+  }
+
+}, []); 
 useEffect(() => {
   API
     .get("http://localhost:8080/presu/traer")
     .then((response) => {
       const fetchedPresu = response.data;
-      console.log(fetchedPresu)
+    
       setPresu(fetchedPresu); 
       setResults(fetchedPresu); 
     
@@ -27,7 +36,7 @@ useEffect(() => {
       const searcher = (e) => {
         const searchTerm= e.target.value.toLowerCase();
         setSearch(searchTerm);
-        console.log(searchTerm);
+       
         const filteredPresu= presu.filter(pre=> 
         pre.nombre.toLowerCase().includes(searchTerm)||
         pre.cedula.toString().includes(searchTerm)||
@@ -62,7 +71,7 @@ useEffect(() => {
             <th>Apellido del Paciente</th>
             <th>Cedula de Identidad</th>
             <th >Total a Pagar</th>
-            <th ></th>
+            {userRole==='USER'? null:( <th></th>)}
           
          
             

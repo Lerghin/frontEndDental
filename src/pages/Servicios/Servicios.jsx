@@ -4,12 +4,23 @@ import Table from "react-bootstrap/Table";
 import TablaServicios from '../../components/TablaServicios.jsx';
 import SideBarServicios from '.././../components/SideBarServicio.jsx';
 import { API } from '../../utils/axios.js';
+import { LS } from '../../utils/LS.js';
 
 const Servicios = () => {
 const [servicios, setServicios]=  useState([]);
 const [search, setSearch]=useState("");
 const [results, setResults]= useState([]);
 const [sortedDoctors, setSortedDoctors] = useState([]);
+const [userRole, setUserRole] = useState(null);
+
+useEffect(() => {
+  const role = LS.getText("role");
+  if (role) {
+    setUserRole(role.trim()); // Eliminar espacios extra si los hay
+  }
+
+}, []);  
+
 useEffect(() => {
   API
     .get("http://localhost:8080/servicios/traer")
@@ -56,7 +67,7 @@ useEffect(() => {
             <th>Nombre del Servicio</th>
             <th>Descripción del Servicio</th>
           
-            <th ></th>
+            {userRole==='USER'? null:( <th></th>)}
           
          
             

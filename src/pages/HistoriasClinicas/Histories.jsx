@@ -8,12 +8,25 @@ import "../css/Home.css";
 import TablaHistoria from "../../components/TablaHistoria";
 import SideBarHistorias from "../../components/SideBarHistorias";
 import { API } from "../../utils/axios";
+import { LS } from "../../utils/LS";
 
 
 const Histories = () => {
   const [histories, setHistories] = useState([]);
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
+  const [userRole, setUserRole] = useState(null);
+  
+  useEffect(() => {
+    const role = LS.getText("role");
+    if (role) {
+      setUserRole(role.trim()); // Eliminar espacios extra si los hay
+    }
+
+  }, []);
+
+
+
   useEffect(() => {
     API
       .get("http://localhost:8080/historias/traer")
@@ -66,7 +79,7 @@ const Histories = () => {
               <th>Secuencia_Tratamiento</th>
         
            
-              <th ></th>
+             {userRole==="USER"? null :(<th ></th>)} 
             
            
               

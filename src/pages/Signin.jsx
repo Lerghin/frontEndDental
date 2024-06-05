@@ -39,11 +39,9 @@ const Signin = () => {
         const { token, role } = res.data;
         LS.set('token', token);
         LS.set('role', role);
-        if (role === 'ADMIN') {
+        
           navigate('/homeadmin');
-        } else {
-          navigate('/homeuser');
-        }
+       
       }
     } catch (error) {
       toast.error(error.message);

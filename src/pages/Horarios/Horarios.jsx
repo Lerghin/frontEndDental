@@ -6,12 +6,24 @@ import "../css/Home.css";
 import TablaHorario from "../../components/TablaHorario";
 import SideBarHorarios from "../../components/SideBarHorarios";
 import { API } from "../../utils/axios";
+import { LS } from "../../utils/LS";
 
 
 const Horarios = () => {
   const [horarios, setHorarios] = useState([]);
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
+
+  const [userRole, setUserRole] = useState(null);
+  
+  useEffect(() => {
+    const role = LS.getText("role");
+    if (role) {
+      setUserRole(role.trim()); // Eliminar espacios extra si los hay
+    }
+
+  }, []);
+
   useEffect(() => {
     API
       .get("http://localhost:8080/horarios/traer")
@@ -77,7 +89,7 @@ const Horarios = () => {
               <th>Hora Final</th>
               <th>Doctor Asignado</th>
               
-              <th ></th>
+             {userRole==='USER'? null :(<th ></th>)} 
             
            
               

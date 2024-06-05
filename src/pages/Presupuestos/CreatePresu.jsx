@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-
 import { Form, Button, Table, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import SideBarPresupuesto from "../../components/SideBarPresupuesto";
 import { generarPDFPresupuesto } from "./generarPDFPRESU";
 import { toast } from "react-toastify";
 import { API } from "../../utils/axios";
+import axios from "axios";
 
 const CreatePresu = () => {
   const [presupuesto, setPresupuesto] = useState({
@@ -14,7 +14,7 @@ const CreatePresu = () => {
     cedula: "",
     detalles: [{ descripcion: "", monto: "" }]
   });
-
+  const [montoBs, setMontoBs] = useState(0);
   const [totalMonto, setTotalMonto] = useState(0);
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const CreatePresu = () => {
 
   const handleChangeDetalle = (index, e) => {
     const detalles = [...presupuesto.detalles];
-    detalles[index][e.target.name] = e.target.value;
+    detalles[index][e.target.name] = e.target.name === 'monto' ? parseFloat(e.target.value) || 0 : e.target.value;
     setPresupuesto({ ...presupuesto, detalles });
   };
 
@@ -41,12 +41,32 @@ const CreatePresu = () => {
     setPresupuesto({ ...presupuesto, detalles });
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("https://v6.exchangerate-api.com/v6/8ee293f7c8b83cfe4baa699c/latest/USD");
+        const valorDollar = res.data.conversion_rates.VES;
+        setMontoBs(valorDollar);
+       
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const total = presupuesto.detalles.reduce((sum, detalle) => sum + parseFloat(detalle.monto || 0), 0);
+    setTotalMonto(total);
+  }, [presupuesto.detalles]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await API.post("http://localhost:8080/presu/crear", presupuesto);
       toast.success("Presupuesto registrado con éxito");
-      generarPDFPresupuesto(response.data, totalMonto); // Llamada para generar el PDF
+      const totalEnBs = (parseFloat(montoBs) * totalMonto).toFixed(2);
+      generarPDFPresupuesto(response.data, totalMonto, totalEnBs); 
       navigate('/presupuesto');
       console.log("Presupuesto creado:", response.data);
       setPresupuesto({ nombre: "", apellido: "", cedula: "", detalles: [{ descripcion: "", monto: "" }] });
@@ -54,11 +74,6 @@ const CreatePresu = () => {
       console.error("Error al crear el presupuesto:", error);
     }
   };
-
-  useEffect(() => {
-    const total = presupuesto.detalles.reduce((sum, detalle) => sum + parseFloat(detalle.monto || 0), 0);
-    setTotalMonto(total);
-  }, [presupuesto.detalles]);
 
   return (
     <div className="home">
@@ -143,7 +158,9 @@ const CreatePresu = () => {
               Agregar Detalle
             </Button>
           </div>
-          <h3 className="text-center">Total: {totalMonto.toFixed(2)}$ US.dollar</h3>
+          <h3 className="text-center font-bold">Total en Dólares: {totalMonto.toFixed(2)}$ </h3>
+          <h3 className="text-center">Tasa BCV: {montoBs.toFixed(2)} Bs</h3>
+          <h3 className="text-center font-bold">Total en Bs: {(parseFloat(montoBs) * totalMonto).toFixed(2)} Bs</h3>
           <br /><br />
           <div className="text-center">
             <Button variant="success" type="submit">

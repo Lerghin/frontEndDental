@@ -4,7 +4,8 @@ import "../pages/css/Home.css";
 import { MdDeleteForever } from "react-icons/md";
 import { API } from "../utils/axios";
 import { RiFileEditFill } from "react-icons/ri";
-
+import { useEffect, useState } from "react";
+import { LS } from "../utils/LS";
 const TablaHorario = ({ data, onDelete }) => {
   const {
    
@@ -12,7 +13,15 @@ const TablaHorario = ({ data, onDelete }) => {
 
    
   } = data;
+  const [userRole, setUserRole] = useState(null);
 
+  useEffect(() => {
+    const role = LS.getText("role");
+    if (role) {
+      setUserRole(role.trim()); // Eliminar espacios extra si los hay
+    }
+  
+  }, []);
   
   const navigate = useNavigate();
 
@@ -43,10 +52,10 @@ const TablaHorario = ({ data, onDelete }) => {
         <td>{horario.horaInicio}</td>
         <td>{horario.horaFin}</td>
         <td> <Link to={`/watchDoctor/${data.codigo_doctor}`}>{data.codigo_doctor ? `${data.nombreDoctor} ${data.apellidoDoctor}` : "Sin asignar"}</Link></td>
-        <td>
+        {userRole==='USER'? null:(<td>
           <RiFileEditFill className="m-2 my-2 h-5" onClick={() => navigate(`/editHorario/${horario.horario_id}`)}  /> 
           <MdDeleteForever className="m-2" onClick={() => horario.horario_id && handleDelete(horario.horario_id)} />
-        </td>
+        </td>)}
       </tr>
 ))}
   </>
