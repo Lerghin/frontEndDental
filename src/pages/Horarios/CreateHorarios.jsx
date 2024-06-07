@@ -112,7 +112,7 @@ const CreateHorarios = () => {
             name="codigo_doctor"
             value={userData.codigo_doctor}
             onChange={handleChange}
-            required
+      
           >
             <option value="">Seleccione una opción...</option>
             {doctor.map((doc) => (
