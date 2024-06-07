@@ -89,7 +89,7 @@ const EditHorario = () => {
            <Row>
                 <Form.Group as={Col} >
                         <Form.Label htmlFor="doctor">Doctor Asignado:</Form.Label>
-                        <Form.Select id="doctor" name="codigo_doctor" value={horario.setDoctor} onChange={handleDoctorChange}  required>
+                        <Form.Select id="doctor" name="codigo_doctor" value={horario.setDoctor} onChange={handleDoctorChange}  >
                             <option value="">Seleccione una opción...</option>
                             {doctor.map(doc => (
                                 <option key={doc.codigo_doctor} value={doc.codigo_doctor}>{doc.nombre} {doc.apellido}</option>
