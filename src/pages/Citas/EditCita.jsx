@@ -80,7 +80,7 @@ const handleDoctorChange = (event) => {
         unDoctor: { codigo_doctor: citas.unDoctor.codigo_doctor },
         servicio: { codigo_servicio: citas.servicio.codigo_servicio },
       };
-      await API.put("http://localhost:8080/admin/citas/editar", citaData);
+      await API.put("/admin/citas/editar", citaData);
       toast.success("Cita editada con éxito");
       console.log("citaData:",citaData)
       navigate("/citas");

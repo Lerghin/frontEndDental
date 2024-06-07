@@ -50,8 +50,7 @@ const RegistrarPacientes = () => {
       alert("Paciente Registrado con éxito");
       navigate("/patients");
     } catch (error) {
-      const { message } = error.response.data;
-      toast.error(message);
+      toast.error(error.response.data)
     }
   };
 

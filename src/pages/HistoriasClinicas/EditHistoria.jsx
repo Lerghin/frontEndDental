@@ -56,7 +56,7 @@ const EditHistoria = () => {
     console.log(historias)
     try {
     
-      await API.put("/historias/editar", historias);
+      await API.put("admin/historias/editar", historias);
       toast.success("Historia editada con éxito");
       console.log("data:",historias)
       navigate("/histories");

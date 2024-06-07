@@ -4,7 +4,7 @@ import "jspdf-autotable";
 
 // Function to add a logo
 const addLogo = (doc) => {
-  const imgData = './.././.././../public/assets/logo.png'; // Ruta de la imagen
+  const imgData = 'https://i.ibb.co/vY4WCxQ/logo.png'; // Ruta de la imagen
   doc.addImage(imgData, 'JPEG', 10, 10, 50, 20); // Ajustar la posición y el tamaño según sea necesario
 };
 
