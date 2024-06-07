@@ -23,12 +23,13 @@ const CrearUsuario = () => {
   const handleSubmit = async () => {
     try {
       const res = await API.post('/auth/admin/register/user', userData);
+      alert("Usuario  registrado con éxito");
       console.log(res);
-      toast.success("Usuario  registrado con éxito");
+     
       
     
      
-      navigate('/homeadmin');
+      navigate('/users');
     
     } catch (error) {
       const { message } = error.response.data;

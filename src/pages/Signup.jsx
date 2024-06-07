@@ -22,11 +22,12 @@ const Signup = () => {
   const handleSubmit = async () => {
     try {
       const res = await API.post('/auth/admin/register', userData);
+      alert("Usuario  registrado con éxito");
       console.log(res);
-      toast.success("Administrador registrado con exito");
+    
   
      
-      navigate('/homeadmin');
+      navigate('/users');
     
     } catch (error) {
       const { message } = error.response.data;
