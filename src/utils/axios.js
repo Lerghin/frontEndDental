@@ -4,20 +4,19 @@ import { logoutUser } from './../../src/pages/Store/Actions/authActions';
 import store from './../../src/pages/Store/store';
 
 const API = axios.create({
-  //baseURL: 'http://localhost:8080', 
-  baseURL: 'https://pruebajavaspringdental-8.onrender.com/', 
+  baseURL: '/api', // Cambia a la ruta proxy configurada
 });
 
 API.interceptors.request.use(config => {
   const token = LS.getText('token');
-  const role = LS.getText('role'); // Obtener el rol del almacenamiento local (u otra fuente)
+  const role = LS.getText('role');
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
 
   if (role) {
-    config.headers['X-User-Role'] = role; // Agregar el rol al encabezado
+    config.headers['X-User-Role'] = role;
   }
 
   return config;
