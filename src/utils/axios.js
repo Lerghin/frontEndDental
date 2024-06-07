@@ -4,7 +4,7 @@ import { logoutUser } from './../../src/pages/Store/Actions/authActions';
 import store from './../../src/pages/Store/store';
 
 const API = axios.create({
-  baseURL: 'https://pruebajavaspringdental-8.onrender.com/', // Cambia a la ruta proxy configurada
+  baseURL: 'https://pruebajavaspringdental-8-jctd.onrender.com', // Cambia a la ruta proxy configurada
 });
 
 API.interceptors.request.use(config => {

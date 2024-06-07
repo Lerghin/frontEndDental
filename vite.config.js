@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://pruebajavaspringdental-8.onrender.com',
+        target: 'https://pruebajavaspringdental-8-jctd.onrender.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
