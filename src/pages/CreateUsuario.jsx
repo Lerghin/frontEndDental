@@ -24,7 +24,7 @@ const CrearUsuario = () => {
     try {
       const res = await API.post('/auth/admin/register/user', userData);
       console.log(res);
-      toast.success(res.message);
+      toast.success("Usuario  registrado con éxito");
       
     
      

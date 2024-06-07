@@ -7,10 +7,14 @@ const addLogo = (doc) => {
   doc.addImage(imgData, 'JPEG', 10, 10, 50, 20); // Ajustar la posición y el tamaño según sea necesario
 };
 
-export const generadorPDF = (transData, paciente, cedula) => {
+export const generadorPDF = (transData, paciente, cedula, montoBs) => {
   // Ajustar los valores nulos a 0.00
   const ingreso = transData.ingreso ? parseFloat(transData.ingreso).toFixed(2) : '0.00';
   const deuda = transData.deuda ? parseFloat(transData.deuda).toFixed(2) : '0.00';
+
+  // Calcular montos en Bolívares
+  const ingresoBs = transData.ingreso ? (parseFloat(transData.ingreso) * montoBs).toFixed(2) : '0.00';
+  const deudaBs = transData.deuda ? (parseFloat(transData.deuda) * montoBs).toFixed(2) : '0.00';
 
   const doc = new jsPDF();
 
@@ -30,8 +34,10 @@ export const generadorPDF = (transData, paciente, cedula) => {
     ["Cédula del Paciente", cedula],
     ["Nombre del Paciente", paciente.nombre],
     ["Apellido del Paciente", paciente.apellido],
-    ["Monto de Consulta o Servicio", `${deuda}$`],
-    ["Monto Cancelado por el Paciente", `${ingreso}$`],
+    ["Monto de Consulta o Servicio (USD)", `${deuda}$`],
+    ["Monto Cancelado por el Paciente (USD)", `${ingreso}$`],
+    ["Monto de Consulta o Servicio (Bs)", `${deudaBs} Bs`],
+    ["Monto Cancelado por el Paciente (Bs)", `${ingresoBs} Bs`],
     ["Observaciones", transData.observaciones],
     ["Método de Pago", transData.formaPago],
   ];

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -7,30 +7,57 @@ import { BiSolidSave } from "react-icons/bi";
 import { API } from "../../utils/axios";
 import DatePicker from "react-datepicker";
 
-import jsPDF from "jspdf";
 import "./../css/RegistroPaciente.css";
 import "react-datepicker/dist/react-datepicker.css";
 import SideBarCitas from "../../components/SideBarCitas";
+import axios from "axios"; 
 import { generadorPDF } from "./pdfGenerator";
-
-
-
 const CreateTrans = () => {
   const navigate = useNavigate();
-
   const [cedula, setCedula] = useState("");
   const [paciente, setPaciente] = useState({ nombre: "", apellido: "" });
   const [userData, setUserData] = useState({
-    fecha: '',
-    observaciones: '',
-    paciente: '', 
-    ingreso: '',
-    deuda: '',
-    formaPago: ''
+    fecha: "",
+    observaciones: "",
+    paciente: "",
+    ingreso: "",
+    deuda: "",
+    formaPago: "",
   });
 
+  const [montoBs, setMontoBs] = useState(0); // Tasa de cambio de USD a Bs
+  const [deudaBs, setDeudaBs] = useState(0); // Valor de deuda en Bs
+  const [ingresoBs, setIngresoBs] = useState(0); // Valor de ingreso en Bs
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          "https://v6.exchangerate-api.com/v6/8ee293f7c8b83cfe4baa699c/latest/USD"
+        );
+        const valorDollar = res.data.conversion_rates.VES;
+        setMontoBs(valorDollar);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+
+    // Convertir automáticamente el valor en dólares a Bolívares
+    if (name === "deuda") {
+      const convertedDeudaBs = parseFloat(value) * montoBs;
+      setDeudaBs(convertedDeudaBs);
+    }
+
+    if (name === "ingreso") {
+      const convertedIngresoBs = parseFloat(value) * montoBs;
+      setIngresoBs(convertedIngresoBs);
+    }
   };
 
   const handleChangeDate = (date) => {
@@ -42,8 +69,7 @@ const CreateTrans = () => {
     setCedula(cedulaValue);
 
     if (cedulaValue.length >= 8) {
-      API
-        .get(`/pacientes/traerbycedula/${cedulaValue}`)
+      API.get(`/pacientes/traerbycedula/${cedulaValue}`)
         .then((response) => {
           if (response.data) {
             setPaciente({
@@ -79,18 +105,6 @@ const CreateTrans = () => {
     }
   };
 
-  const generatePDF = (data) => {
-    const doc = new jsPDF();
-    doc.text(`Fecha: ${data.fecha}`, 10, 10);
-    doc.text(`Cédula del Paciente: ${cedula}`, 10, 20);
-    doc.text(`Nombre del Paciente: ${paciente.nombre}`, 10, 30);
-    doc.text(`Apellido del Paciente: ${paciente.apellido}`, 10, 40);
-    doc.text(`Monto de Consulta o Servicio: ${data.deuda}`, 10, 50);
-    doc.text(`Monto Cancelado por el Paciente: ${data.ingreso}`, 10, 60);
-    doc.text(`Observaciones: ${data.observaciones}`, 10, 70);
-    doc.text(`Método de Pago: ${data.formaPago}`, 10, 80);
-    doc.save("registro_pago.pdf");
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -105,9 +119,8 @@ const CreateTrans = () => {
         console.log(data);
         toast.success(data.message);
         alert("Pago registrado con éxito");
-        generatePDF(transData,paciente, cedula)
-       navigate("/transaction")
-       generadorPDF(transData, paciente, cedula)
+        generadorPDF(transData, paciente, cedula, montoBs);
+        navigate("/transaction");
       }
     } catch (error) {
       const { message } = error.response.data;
@@ -177,22 +190,30 @@ const CreateTrans = () => {
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formDeuda">
-                <Form.Label>Monto de Consulta o Servicio</Form.Label>
+                <Form.Label>Monto de Consulta o Servicio (USD)</Form.Label>
                 <Form.Control
                   type="number"
                   name="deuda"
                   value={userData.deuda}
                   onChange={handleChange}
+                  required
                 />
+                <Form.Text className="text-muted">
+                  {`Monto en Bolívares (Bs): ${deudaBs.toFixed(2)} Bs`}
+                </Form.Text>
               </Form.Group>
               <Form.Group as={Col} controlId="formIngreso">
-                <Form.Label>Monto Cancelado por el Paciente</Form.Label>
+                <Form.Label>Monto Cancelado por el Paciente (USD)</Form.Label>
                 <Form.Control
                   type="number"
                   name="ingreso"
                   value={userData.ingreso}
                   onChange={handleChange}
+                  required
                 />
+                <Form.Text className="text-muted">
+                  {`Monto en Bolívares (Bs): ${ingresoBs.toFixed(2)} Bs`}
+                </Form.Text>
               </Form.Group>
               <Form.Group as={Col} controlId="formObservaciones">
                 <Form.Label>Observaciones</Form.Label>
@@ -231,7 +252,10 @@ const CreateTrans = () => {
               <Button variant="success" type="submit">
                 <BiSolidSave />
               </Button>
-              <Button onClick={() => navigate("/transaction")} variant="secondary">
+              <Button
+                onClick={() => navigate("/transaction")}
+                variant="secondary"
+              >
                 <RiArrowGoBackFill />
               </Button>
             </div>

@@ -8,7 +8,7 @@ import { API } from "../utils/axios";
 import { generadorPDF } from "../pages/Administration/pdfGenerator";
 import { useEffect, useState } from "react";
 import { LS } from "../utils/LS";
-
+import axios from "axios";
 
 const TablaTransactions = ({ data, onDelete }) => {
   const {
@@ -23,14 +23,30 @@ const TablaTransactions = ({ data, onDelete }) => {
     formaPago
   } = data;
   const [userRole, setUserRole] = useState(null);
+  const [montoBs, setMontoBs] = useState(0);
 
   useEffect(() => {
     const role = LS.getText("role");
     if (role) {
       setUserRole(role.trim()); // Eliminar espacios extra si los hay
     }
-   
+
+    // Obtener la tasa de cambio del dólar a bolívar
+    const fetchExchangeRate = async () => {
+      try {
+        const res = await axios.get(
+          "https://v6.exchangerate-api.com/v6/8ee293f7c8b83cfe4baa699c/latest/USD"
+        );
+        const valorDollar = res.data.conversion_rates.VES;
+        setMontoBs(valorDollar);
+      } catch (error) {
+        console.error("Error fetching exchange rate:", error);
+      }
+    };
+
+    fetchExchangeRate();
   }, []); 
+
   const navigate = useNavigate();
 
   const handleDelete = async (codigo_transaccion) => {
@@ -48,7 +64,8 @@ const TablaTransactions = ({ data, onDelete }) => {
   };
 
   const handleGeneratePDF = () => {
-    generadorPDF(data, paciente, paciente.cedula);
+    // Pasar la tasa de cambio a la función generadorPDF
+    generadorPDF(data, paciente, paciente.cedula, montoBs);
   };
 
   return (
@@ -68,15 +85,18 @@ const TablaTransactions = ({ data, onDelete }) => {
       <td>{parseFloat(ingresoDoctor).toFixed(2)}$</td>
       <td>{parseFloat(ingresoClinica).toFixed(2)}$</td>
       <td>
-      {userRole==='USER'? null:( <th>  <FaUserEdit
-          className="m-2 my-2 h-5"
-          onClick={() => navigate(`/editTrans/${codigo_transaccion}`)}
-        />
-        <MdDeleteForever
-          className="m-2"
-          onClick={() => handleDelete(codigo_transaccion)}
-        /></th>)}
-      
+        {userRole === 'USER' ? null : (
+          <>
+            <FaUserEdit
+              className="m-2 my-2 h-5"
+              onClick={() => navigate(`/editTrans/${codigo_transaccion}`)}
+            />
+            <MdDeleteForever
+              className="m-2"
+              onClick={() => handleDelete(codigo_transaccion)}
+            />
+          </>
+        )}
         <AiOutlineFilePdf
           className="m-2"
           onClick={handleGeneratePDF}
