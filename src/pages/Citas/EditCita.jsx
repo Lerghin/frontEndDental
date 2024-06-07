@@ -31,14 +31,14 @@ const EditCita = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await API.get(`http://localhost:8080/citas/traer/${codigo_cita}`);
+        const response = await API.get(`/citas/traer/${codigo_cita}`);
         setCitas(response.data);
         setCedula(response.data.unPaciente.cedula);
 
-        const responseDoctor = await API.get("http://localhost:8080/doctor/traer");
+        const responseDoctor = await API.get("/doctor/traer");
         setDoctors(responseDoctor.data);
 
-        const responseServicios = await API.get("http://localhost:8080/servicios/traer");
+        const responseServicios = await API.get("/servicios/traer");
         setServicios(responseServicios.data);
       } catch (error) {
         console.error('Error fetching data:', error);

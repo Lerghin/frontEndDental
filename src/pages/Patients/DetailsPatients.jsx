@@ -23,11 +23,11 @@ const DetailsPatients = () => {
         const fetchData = async () => {
             try {
                 const [patientResponse, citasResponse, historyResponse, debeResponse, transResp] = await Promise.all([
-                    API.get(`http://localhost:8080/pacientesdr/traer/${params.codigo_paciente}`),
-                    API.get(`http://localhost:8080/pacientescita/traer/${params.codigo_paciente}`),
-                    API.get(`http://localhost:8080/pacienteshistory/traer/${params.codigo_paciente}`),
-                    API.get(`http://localhost:8080/total-debe/${params.codigo_paciente}`),
-                    API.get(`http://localhost:8080/trans/getbyPatient/${params.codigo_paciente}`)
+                    API.get(`/pacientesdr/traer/${params.codigo_paciente}`),
+                    API.get(`/pacientescita/traer/${params.codigo_paciente}`),
+                    API.get(`/pacienteshistory/traer/${params.codigo_paciente}`),
+                    API.get(`/total-debe/${params.codigo_paciente}`),
+                    API.get(`/trans/getbyPatient/${params.codigo_paciente}`)
                 ]);
 
                 setPatient(patientResponse.data);

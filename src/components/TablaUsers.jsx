@@ -1,6 +1,6 @@
 import {  useNavigate } from "react-router-dom";
 import "../pages/css/Home.css";
-import { FaUserEdit } from "react-icons/fa";
+
 import { MdDeleteForever } from "react-icons/md";
 import { API } from "../utils/axios";
 import { useEffect, useState } from "react";

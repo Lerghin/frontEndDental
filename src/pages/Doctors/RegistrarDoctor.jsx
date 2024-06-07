@@ -12,7 +12,7 @@ const RegistrarDoctor = () => {
   const navigate=useNavigate();
   useEffect(() => {
     API
-      .get("http://localhost:8080/onlyhorarios/traer")
+      .get("/onlyhorarios/traer")
       .then((response) => {
         setHorarios(response.data);
         console.log(response.data)

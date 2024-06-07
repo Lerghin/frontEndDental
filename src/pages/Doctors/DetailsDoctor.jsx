@@ -18,7 +18,7 @@ const DetailsDoctor = () => {
       try {
         const [doctorResponse] = await Promise.all([
           API.get(
-            `http://localhost:8080/doctor/traer/${params.codigo_doctor}`
+            `/doctor/traer/${params.codigo_doctor}`
           ),
         ]);
         console.log(doctorResponse.data);

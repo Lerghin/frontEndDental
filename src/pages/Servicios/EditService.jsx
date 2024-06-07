@@ -16,7 +16,7 @@ const EditService = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await API.get(`http://localhost:8080/servicios/traer/${params.codigo_servicio}`);
+                const response = await API.get(`/servicios/traer/${params.codigo_servicio}`);
                 
                 setServicio(response.data);
                 console.log(response.data);
@@ -42,7 +42,7 @@ const EditService = () => {
         event.preventDefault();
         console.log("Datos a enviar:", servicio); 
         try {
-      const{data}=   await API.put(`http://localhost:8080/admin/servicios/editar/${params.codigo_servicio}`, servicio);
+      const{data}=   await API.put(`/admin/servicios/editar/${params.codigo_servicio}`, servicio);
                 
             toast.success(data.message)
       

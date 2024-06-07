@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SideBarPacientes from "../../components/SideBarPacientes";
-import axios from "axios";
+
 import DatePicker from "react-datepicker";
 import { API } from "../../utils/axios";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
@@ -26,7 +26,7 @@ const RegistrarPacientes = () => {
 
   useEffect(() => {
     API
-      .get("http://localhost:8080/doctor/traer")
+      .get("/doctor/traer")
       .then((response) => {
         setDoctor(response.data);
       })

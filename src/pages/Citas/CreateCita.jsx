@@ -44,7 +44,7 @@ const CreateCita = () => {
 
     if (cedulaValue.length >= 8) {
       API
-        .get(`http://localhost:8080/pacientes/traerbycedula/${cedulaValue}`)
+        .get(`/pacientes/traerbycedula/${cedulaValue}`)
         .then((response) => {
           if (response.data) {
             setPaciente({
@@ -84,7 +84,7 @@ const CreateCita = () => {
 
   useEffect(() => {
     API
-      .get("http://localhost:8080/servicios/traer")
+      .get("/servicios/traer")
       .then((response) => {
         const fetchedServicios = response.data;
         setServicios(fetchedServicios); 

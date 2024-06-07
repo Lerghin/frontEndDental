@@ -22,7 +22,7 @@ const CreateHorarios = () => {
 
   useEffect(() => {
     API
-      .get("http://localhost:8080/doctor/traer")
+      .get("/doctor/traer")
       .then((response) => {
         setDoctor(response.data);
         //console.log(response.data)

@@ -43,7 +43,7 @@ const CreateHistoria = () => {
 
     if (cedulaValue.length >= 8) {
       try {
-        const response = await API.get(`http://localhost:8080/pacientes/traerbycedula/${cedulaValue}`);
+        const response = await API.get(`/pacientes/traerbycedula/${cedulaValue}`);
         if (response.data) {
           setPaciente({
             nombre: response.data.nombre,

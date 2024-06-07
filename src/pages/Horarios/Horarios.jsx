@@ -26,7 +26,7 @@ const Horarios = () => {
 
   useEffect(() => {
     API
-      .get("http://localhost:8080/horarios/traer")
+      .get("/horarios/traer")
       .then((response) => {
  
         setHorarios(response.data);

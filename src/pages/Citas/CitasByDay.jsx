@@ -13,7 +13,7 @@ const CitasByDay = () => {
   const [message, setMessage] = useState('');
  const navigate=useNavigate();
   useEffect(() => {
-    API.get('http://localhost:8080/citas/hoy')
+    API.get('/citas/hoy')
       .then(response => {
         setCitas(response.data.citas);
         setMessage(response.data.message);

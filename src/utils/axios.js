@@ -4,7 +4,8 @@ import { logoutUser } from './../../src/pages/Store/Actions/authActions';
 import store from './../../src/pages/Store/store';
 
 const API = axios.create({
-  baseURL: 'http://localhost:8080', 
+  //baseURL: 'http://localhost:8080', 
+  baseURL: 'https://pruebajavaspringdental-8.onrender.com/', 
 });
 
 API.interceptors.request.use(config => {

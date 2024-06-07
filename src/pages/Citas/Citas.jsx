@@ -28,7 +28,7 @@ const Citas = () => {
 
   useEffect(() => {
      API
-      .get("http://localhost:8080/citas/traer")
+      .get("/citas/traer")
       .then((response) => {
         const fetchedCitas = response.data;
         // Sort by date from today to the past

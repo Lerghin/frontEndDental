@@ -15,10 +15,10 @@ const EditDoctor = () => {
     const fetchData = async () => {
       try {
         const response = await API.get(
-          `http://localhost:8080/doctor/traer/${params.codigo_doctor}`
+          `/doctor/traer/${params.codigo_doctor}`
         );
         const responseHorarios = await API.get(
-          "http://localhost:8080/onlyhorarios/traer"
+          "/onlyhorarios/traer"
         );
         setDoctor(response.data);
         setHorarios(responseHorarios.data);
@@ -68,7 +68,7 @@ const EditDoctor = () => {
     try {
        
       const { data } = await API.put(
-        `http://localhost:8080/admin/doctor/editar/${params.codigo_doctor}`,
+        `/admin/doctor/editar/${params.codigo_doctor}`,
         doctor
       );
       if (data) {

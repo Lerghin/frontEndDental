@@ -23,7 +23,7 @@ useEffect(() => {
 
 useEffect(() => {
   API
-    .get("http://localhost:8080/servicios/traer")
+    .get("/servicios/traer")
     .then((response) => {
       const fetchedServicios = response.data;
       setServicios(fetchedServicios); 

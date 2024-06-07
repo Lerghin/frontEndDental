@@ -16,8 +16,8 @@ const EditHorario = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await API.get(`http://localhost:8080/horarios/traer/${params.horario_id}`);
-                const responseDoctor=await API.get('http://localhost:8080/doctor/traer');
+                const response = await API.get(`/horarios/traer/${params.horario_id}`);
+                const responseDoctor=await API.get('/doctor/traer');
                 setHorario(response.data);
                 console.log(response.data);
                 setDoctor(responseDoctor.data);
@@ -46,7 +46,7 @@ const EditHorario = () => {
         event.preventDefault();
         
         try {
-      const{data}=   await API.put(`http://localhost:8080/admin/horarios/editar/${params.horario_id}`, horario);
+      const{data}=   await API.put(`/admin/horarios/editar/${params.horario_id}`, horario);
                 
             toast.success(data.message)
       

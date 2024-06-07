@@ -23,7 +23,7 @@ useEffect(() => {
 }, []); 
 useEffect(() => {
   API
-    .get("http://localhost:8080/presu/traer")
+    .get("/presu/traer")
     .then((response) => {
       const fetchedPresu = response.data;
     

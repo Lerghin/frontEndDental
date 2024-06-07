@@ -55,7 +55,7 @@ const EditPresu = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await API.put(`http://localhost:8080/admin/presu/editar/${codigo_presupuesto}`, presupuesto);
+      const response = await API.put(`/admin/presu/editar/${codigo_presupuesto}`, presupuesto);
       toast.success("Presupuesto editado con éxito");
       navigate('/presupuesto');
       console.log("Presupuesto actualizado:", response.data);

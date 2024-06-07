@@ -43,7 +43,7 @@ const CreateTrans = () => {
 
     if (cedulaValue.length >= 8) {
       API
-        .get(`http://localhost:8080/pacientes/traerbycedula/${cedulaValue}`)
+        .get(`/pacientes/traerbycedula/${cedulaValue}`)
         .then((response) => {
           if (response.data) {
             setPaciente({

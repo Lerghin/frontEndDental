@@ -1,8 +1,4 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import { CiMenuKebab } from "react-icons/ci";
-import { TiDelete } from "react-icons/ti";
-
 
 import { Outlet } from 'react-router-dom';
 import './MainLayout.css';

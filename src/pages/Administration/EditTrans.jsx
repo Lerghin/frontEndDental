@@ -31,7 +31,7 @@ const EditTrans = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await API.get(`http://localhost:8080/trans/traer/${codigo_transaccion}`);
+        const response = await API.get(`/trans/traer/${codigo_transaccion}`);
         setTrans(response.data);
         setCedula(response.data.paciente.cedula);
 
@@ -69,7 +69,7 @@ const EditTrans = () => {
         paciente: { codigoPaciente: trans.paciente.codigoPaciente }
      
       };
-      await API.put("http://localhost:8080/admin/trans/edit", transData);
+      await API.put("/admin/trans/edit", transData);
       toast.success("Pago editado con éxito");
       
       navigate("/transaction");

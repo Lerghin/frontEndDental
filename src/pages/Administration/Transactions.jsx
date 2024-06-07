@@ -18,7 +18,7 @@ const Transactions = () => {
 
   useEffect(() => {
     API
-      .get("http://localhost:8080/trans/traer")
+      .get("/trans/traer")
       .then((response) => {
         const fetchedCitas = response.data;
      

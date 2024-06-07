@@ -63,7 +63,7 @@ const CreatePresu = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await API.post("http://localhost:8080/presu/crear", presupuesto);
+      const response = await API.post("/presu/crear", presupuesto);
       toast.success("Presupuesto registrado con éxito");
       const totalEnBs = (parseFloat(montoBs) * totalMonto).toFixed(2);
       generarPDFPresupuesto(response.data, totalMonto, totalEnBs); 

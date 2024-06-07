@@ -16,8 +16,8 @@ const EditPatientForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await API.get(`http://localhost:8080/pacientesdr/traer/${params.codigo_paciente}`);
-                const responseDoctor=await API.get('http://localhost:8080/doctor/traer');
+                const response = await API.get(`/pacientesdr/traer/${params.codigo_paciente}`);
+                const responseDoctor=await API.get('/doctor/traer');
                 setPaciente(response.data);
                 setDoctor(responseDoctor.data);
                

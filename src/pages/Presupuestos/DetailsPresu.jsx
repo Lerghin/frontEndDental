@@ -19,7 +19,7 @@ const DetailsPatients = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const presuResponse = await API.get(`http://localhost:8080/presu/traer/${params.codigo_presupuesto}`);
+                const presuResponse = await API.get(`/presu/traer/${params.codigo_presupuesto}`);
                 setPresu(presuResponse.data);
             } catch (error) {
                 setError(error.message);

@@ -29,7 +29,7 @@ const Histories = () => {
 
   useEffect(() => {
     API
-      .get("http://localhost:8080/historias/traer")
+      .get("/historias/traer")
       .then((response) => {
         setHistories(response.data);
         console.log(response.data)

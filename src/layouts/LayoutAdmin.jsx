@@ -17,7 +17,7 @@ const LayoutAdmin = () => {
       <header className="w-100 h-100  d-flex  justify-content-between align-items-center   ">
         <div className=" d-flex align-items-center    overflow-hidden ">
           <img
-            src="./../../public/assets/logo.png"
+            src="https://ibb.co/WtvXNWP"
             alt="Logo"
             className="logo"
           />
