@@ -93,7 +93,7 @@ const CreateCita = () => {
   }, []);
   useEffect(() => {
     API
-      .get("http://localhost:8080/doctor/traer")
+      .get("/doctor/traer")
       .then((response) => {
         const fetchedDoctors = response.data;
         setDoctors(fetchedDoctors); 
